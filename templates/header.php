@@ -1,3 +1,9 @@
+<?php
+
+use App\Entity\User;
+use App\Tools\NavigationTools;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +14,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
-    <title>Document</title>
+    <title>Soigne Moi</title>
 </head>
 <body>
 
@@ -29,10 +35,14 @@
         </ul>
 
         <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
-        </div>
-    </header>
+                <?php if (User::isLogged()) { ?>
+                    <a href="/index.php?controller=auth&action=logout" class="btn btn-primary">Déconnexion</a>
+                <?php } else { ?>
+                    <a href="/index.php?controller=auth&action=login" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('auth', 'login') ?>">Connexion</a>
+                    <a href="/index.php?controller=user&action=register" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('user', 'register') ?>">Créer un compte</a>
+                <?php } ?>
+            </div>
     </div>
+    </header>
 
 <main>

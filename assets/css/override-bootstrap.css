@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css2?family=Thasadith:ital,wght@0,400;0,700;1,400;1,700&display=swap);
 :root {
     --primary: #22949B;
     --secondary: #114C4F;
@@ -62,11 +63,11 @@
 }
 
 h1 {
-    color: var(--primary);
+    color: var(--primary) !important;
 }
 
 h2, h3 {
-    color: var(--secondary);
+    color: var(--secondary)
 }
 
 .card-img-top {
@@ -74,4 +75,13 @@ h2, h3 {
     height: 15vw;
     object-fit: cover;
     object-position: 50% 0%;
+}
+
+body {
+    font-family: 'Thasadith', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 700; 
 }

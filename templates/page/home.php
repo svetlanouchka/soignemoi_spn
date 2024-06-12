@@ -10,17 +10,17 @@
         <img src="assets/images/_2c9b11c1-dc44-4f30-bfb1-579a44ef1c74.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
     </div>
     <div class="col-lg-6">
-        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
-        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 line-heght-2">Votre Santé, Notre Priorité</h1>
+        <p class="lead">Bienvenue à SoigneMoi, votre hôpital de confiance dans la région lilloise. Nous nous engageons à fournir des soins de qualité avec une attention personnalisée pour chaque patient. Grâce à notre nouvelle plateforme en ligne, planifiez facilement vos séjours, consultez vos historiques médicaux et accédez à des services médicaux optimisés pour répondre à tous vos besoins de santé. Rejoignez-nous et découvrez une expérience de soins de santé innovante et humaine.</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Créer votre séjour</button>
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4">En savoir plus</button>
         </div>
     </div>
     </div>
 </div>
 
-        <div class="row text-center"> 
+        <div class="container mt-5 row text-center"> 
             <div class="col-md-4 my-2 d-flex">
                 <div class="card">
                 <img src="uploads/categories/chirurgie.jpg" class="card-img-top" alt="...">
