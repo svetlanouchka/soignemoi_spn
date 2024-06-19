@@ -35,7 +35,6 @@ Class Controller
                         break;
                     default:
                         throw new \Exception("Le controleur n'existe pas");
-                        break;
                 }
             } else {
                 $pageController = new PageController();

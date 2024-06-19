@@ -27,11 +27,14 @@ use App\Tools\NavigationTools;
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2">Features</a></li>
-        <li><a href="#" class="nav-link px-2">Pricing</a></li>
-        <li><a href="#" class="nav-link px-2">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2">About</a></li>
+        <li><a href="/" class="nav-link px-2 link-secondary" <?= NavigationTools::addActiveClass('page', 'home') ?>>Accueil</a></li>
+        <?php if (User::isLogged()){ ?>
+            <li><a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=create" class="nav-link px-2" <?= NavigationTools::addActiveClass('sejour', 'create') ?>>Créer le séjour</a></li>
+        <?php } else { ?>
+            <li><a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=auth&action=login" class="nav-link px-2" <?= NavigationTools::addActiveClass('auth', 'login') ?>>Créer le séjour</a></li>
+        <?php } ?>
+        <li><a href="#" class="nav-link px-2">Espace admin</a></li>
+        <li><a href="#" class="nav-link px-2">A propos</a></li>
         </ul>
 
         <div class="col-md-3 text-end">

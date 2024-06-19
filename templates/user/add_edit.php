@@ -29,7 +29,7 @@
         </div>
         <div class="mb-3">
             <label for="adress" class="form-label">Adresse postale</label>
-            <input type="adress" class="form-control <?=(isset($errors['adress']) ? 'is-invalid': '') ?>" id="adress" name="adress" value="">
+            <input type="text" class="form-control <?=(isset($errors['adress']) ? 'is-invalid': '') ?>" id="adress" name="adress" value="">
             <?php if(isset($errors['adress'])) { ?>
                 <div class="invalid-feedback"><?=$errors['adress'] ?></div>
             <?php } ?>

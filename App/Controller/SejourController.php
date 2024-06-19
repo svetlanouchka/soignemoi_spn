@@ -3,6 +3,11 @@
 namespace App\Controller;
 
 use App\Repository\SejourRepository;
+use App\Repository\MedecinRepository;
+use App\Repository\SpecialiteRepository;
+use App\Entity\Sejour;
+use App\Entity\Medecin;
+use App\Entity\Specialite;
 
 class SejourController extends Controller
 {
@@ -12,18 +17,18 @@ class SejourController extends Controller
         if (isset($_GET['action'])) {
             switch ($_GET['action']) {
                 case 'show':
-                    # appeler la méthode about()
+                    # appeler la méthode show()
                     $this->show();
                     break;
                 case 'create':
-                    # appeler la méthode about()
+                    # appeler la méthode create()
+                    $this->createSejour();
                     break;
                 case 'list':
-                    # charger controleur home
+                    # appeler la méthode list()
                     break;
                 default:
                     throw new \Exception("Cette action n'existe pas : ".$_GET['action']);
-                    break;
             }
         } else {
             throw new \Exception("Aucune action détectée");
@@ -35,7 +40,55 @@ class SejourController extends Controller
     }
 }
 
+public function createSejour()
+{
 
+    $medecinRepository = new MedecinRepository();
+    $specialiteRepository = new SpecialiteRepository();
+
+    $medecins = $medecinRepository->findAll(); 
+    $specialites = $specialiteRepository->findAll(); 
+
+    // Appel de la méthode create() avec les données nécessaires
+    $this->create($medecins, $specialites);
+}
+
+
+protected function create($medecins, $specialites)
+{
+    try {
+        $errors = [];
+        $sejour = new Sejour();
+
+        if (isset($_POST['saveSejour'])) {
+            
+            $sejour->hydrate($_POST);
+
+
+            $errors = $sejour->validate();
+
+            if (empty($errors)) {
+                $sejourRepository = new SejourRepository();
+                
+                $sejourRepository->persist($sejour);
+                header('Location: index.php?controller=page&action=home');
+            }
+        }
+
+        $this->render('sejour/creation_sejour', [
+            'pageTitle' => 'Création de sejour',
+            'medecins' => $medecins,
+            'specialites' => $specialites,
+            'errors' => $errors
+        ]);
+
+    } catch (\Exception $e) {
+        $this->render('errors/default', [
+            'error' => $e->getMessage()
+        ]);
+    } 
+
+}
 protected function show()
 {
     try {

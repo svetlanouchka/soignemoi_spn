@@ -8,11 +8,21 @@ class Sejour extends Entity
 {
 
     protected ?int $id = null;
-    protected DateTime $date_debut = '';
-    protected DateTime $date_fin = '';
+    protected DateTime $date_debut;
+    protected DateTime $date_fin;
     protected ?string $motif = '';
-    protected ?string $specialite = ''; 
+    protected ?int $specialite_id; 
+    protected ?int $medecin_id;
     
+    public function __construct()
+    {
+        // Initialisation des propriétés par défaut
+        $this->date_debut = new DateTime();
+        $this->date_fin = new DateTime();
+        $this->motif = '';
+        $this->specialite_id = 0;
+        $this->medecin_id = 0;
+    }
 
     /**
      * Get the value of id
@@ -37,7 +47,7 @@ class Sejour extends Entity
     /**
      * Get the value of date_debut
      */ 
-    public function getDate_debut()
+    public function getDate_debut() : DateTime
     {
         return $this->date_debut;
     }
@@ -47,7 +57,7 @@ class Sejour extends Entity
      *
      * @return  self
      */ 
-    public function setDate_debut($date_debut)
+    public function setDate_debut(DateTime $date_debut) : self
     {
         $this->date_debut = $date_debut;
 
@@ -57,7 +67,7 @@ class Sejour extends Entity
     /**
      * Get the value of date_fin
      */ 
-    public function getDate_fin()
+    public function getDate_fin() : DateTime
     {
         return $this->date_fin;
     }
@@ -67,7 +77,7 @@ class Sejour extends Entity
      *
      * @return  self
      */ 
-    public function setDate_fin($date_fin)
+    public function setDate_fin(DateTime $date_fin) : self
     {
         $this->date_fin = $date_fin;
 
@@ -97,9 +107,9 @@ class Sejour extends Entity
     /**
      * Get the value of specialite
      */ 
-    public function getSpecialite()
+    public function getSpecialite_id()
     {
-        return $this->specialite;
+        return $this->specialite_id;
     }
 
     /**
@@ -107,10 +117,52 @@ class Sejour extends Entity
      *
      * @return  self
      */ 
-    public function setSpecialite($specialite)
+    public function setSpecialite_id($specialite)
     {
-        $this->specialite = $specialite;
+        $this->specialite_id = $specialite;
 
         return $this;
     }
+
+        /**
+     * Get the value of medecin_id
+     */ 
+    public function getMedecin_id()
+    {
+        return $this->medecin_id;
+    }
+
+    /**
+     * Set the value of medecin_id
+     *
+     * @return  self
+     */ 
+    public function setMedecin_id($medecin_id)
+    {
+        $this->medecin_id = $medecin_id;
+
+        return $this;
+    }
+    public function validate(): array
+    {
+        $errors = [];
+        if (empty($this->getDate_debut())) {
+            $errors['date_debut'] = 'Le champ date de début ne doit pas être vide';
+        }
+        if (empty($this->getDate_fin())) {
+            $errors['date_fin'] = 'Le champ date de fin ne doit pas être vide';
+        }
+        if (empty($this->getMotif())) {
+            $errors['motif'] = 'Le champ motif ne doit pas être vide';
+        } 
+        if (empty($this->getSpecialite_id())) {
+            $errors['specialite_id'] = 'Le champ specialite ne doit pas être vide';
+        }
+        if (empty($this->getMedecin_id())) {
+            $errors['medecin_id'] = 'Le champ médecin ne doit pas être vide';
+        }
+        return $errors;
+    }
+
+
 }

@@ -63,7 +63,12 @@
 }
 
 h1 {
-    color: var(--primary) !important;
+    color: var(--primary)
+}
+
+h1.custom-h1 {
+    font-size: 2rem; 
+    color: #22949B; 
 }
 
 h2, h3 {

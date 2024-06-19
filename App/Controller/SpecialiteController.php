@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Repository\MedecinRepository;
-use App\Entity\Medecin;
-class MedecinController extends Controller
+use App\Repository\SpecialiteRepository;
+use App\Entity\Specialite;
+class SpecialiteController extends Controller
 
 {
     public function route():void
@@ -13,11 +13,11 @@ class MedecinController extends Controller
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
                     case 'show':
-                        # appeler la méthode about()
+                        # appeler la méthode show
                         $this->show();
                         break;
                     case 'create':
-                        # appeler la méthode about()
+                        # appeler la méthode create
                         break;
                     case 'list':
                         # charger controleur home
@@ -46,12 +46,11 @@ protected function show()
             $id = (int)$_GET['id'];
             // Charger le medecin par un appel au repository
 
-            $medecinRepository = new MedecinRepository();
-            $medecin = $medecinRepository->findOneById($id);
-            var_dump($medecin);
+            $specialiteRepository = new SpecialiteRepository();
+            $specialite = $specialiteRepository->findOneById($id);
             
-            $this->render('medecin/show', [
-                'medecin' => $medecin,
+            $this->render('specialite/show', [
+                'specialite' => $specialite,
             ]);
         } else {
             throw new \Exception("L'id est manquant en paramètre");

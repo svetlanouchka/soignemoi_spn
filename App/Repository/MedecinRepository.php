@@ -18,7 +18,19 @@ class MedecinRepository extends Repository
             } else {
                 return false;
             }
+        }            
+    public function findAll(): array
+            {
+                $query = $this->pdo->query("SELECT * FROM medecin");
+                $medecinsData = $query->fetchAll($this->pdo::FETCH_ASSOC);
+                $medecins = [];
                 
+                foreach ($medecinsData as $medecinData) {
+                    $medecins[] = Medecin::createAndHydrate($medecinData);
+                }
+                
+                return $medecins;
+            }
         
         // Appel bdd
         /*$mysql = Mysql::getInstance();
@@ -38,4 +50,3 @@ class MedecinRepository extends Repository
 
         return $medecinEntity;*/
     }
-}

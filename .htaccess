@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RewriteRule ^a-propos/$ index.php?controller=page&action=about

@@ -7,9 +7,20 @@ class Medecin extends Entity
     protected ?int $id = null;
     protected string $nom;
     protected string $prenom;
-    protected string $specialite;
+    protected int $specialite_id;
     protected string $matricule; 
 
+    public function __construct(
+        string $nom = '',
+        string $prenom = '',
+        int $specialite_id = 0,
+        string $matricule = ''
+    ) {
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->specialite_id = $specialite_id;
+        $this->matricule = $matricule;
+    }
     /**
      * Get the value of id
      */ 
@@ -73,9 +84,9 @@ class Medecin extends Entity
     /**
      * Get the value of specialite
      */ 
-    public function getSpecialite()
+    public function getSpecialite_id()
     {
-        return $this->specialite;
+        return $this->specialite_id;
     }
 
     /**
@@ -83,9 +94,9 @@ class Medecin extends Entity
      *
      * @return  self
      */ 
-    public function setSpecialite($specialite)
+    public function setSpecialite_id($specialite_id)
     {
-        $this->specialite = $specialite;
+        $this->specialite_id = $specialite_id;
 
         return $this;
     }
@@ -109,4 +120,4 @@ class Medecin extends Entity
 
         return $this;
     }
-}
+} 

@@ -23,7 +23,6 @@ class UserController extends Controller
                         break;
                     default:
                         throw new \Exception("Cette action n'existe pas : " . $_GET['action']);
-                        break;
                 }
             } else {
                 throw new \Exception("Aucune action détectée");
