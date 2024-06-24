@@ -41,8 +41,8 @@ use App\Tools\NavigationTools;
                 <?php if (User::isLogged()) { ?>
                     <a href="/index.php?controller=auth&action=logout" class="btn btn-primary">Déconnexion</a>
                 <?php } else { ?>
-                    <a href="/index.php?controller=auth&action=login" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('auth', 'login') ?>">Connexion</a>
-                    <a href="/index.php?controller=user&action=register" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('user', 'register') ?>">Créer un compte</a>
+                    <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=auth&action=login" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('auth', 'login') ?>">Connexion</a>
+                    <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=auth&action=register" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('user', 'register') ?>">Créer un compte</a>
                 <?php } ?>
             </div>
     </div>

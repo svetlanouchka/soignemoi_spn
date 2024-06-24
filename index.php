@@ -9,6 +9,19 @@ session_set_cookie_params([
     'httponly' => true
 ]);
 session_start();
+
+// Vérifiez si la session est démarrée
+if (!isset($_SESSION)) {
+    echo "Session n'est pas démarrée.";
+}
+
+if (!isset($_SESSION['user'])) {
+    echo "Utilisateur non connecté.";
+} else {
+    $user_id = $_SESSION['user']['id'];
+}
+
+var_dump($_SESSION['user']);
 define('_ROOTPATH_', __DIR__);
 
 spl_autoload_register();
@@ -20,9 +33,5 @@ use App\Entity\User;
 
 $controller = new Controller();
 $controller->route();
-
-
-?>
-
 
 

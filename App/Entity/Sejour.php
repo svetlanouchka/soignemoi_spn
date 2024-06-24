@@ -13,6 +13,7 @@ class Sejour extends Entity
     protected ?string $motif = '';
     protected ?int $specialite_id; 
     protected ?int $medecin_id;
+    protected ?int $user_id = null;
     
     public function __construct()
     {
@@ -143,6 +144,27 @@ class Sejour extends Entity
 
         return $this;
     }
+
+    /**
+     * Get the value of user_id
+     */ 
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * Set the value of user_id
+     *
+     * @return  self
+     */ 
+    public function setUserId(?int $user_id): self
+    {
+        $this->user_id = $user_id;
+
+        return $this;
+    }
+
     public function validate(): array
     {
         $errors = [];

@@ -14,6 +14,8 @@ class User extends Entity
     protected ?string $adress = ''; 
     protected ?string $role = '';
 
+    protected ?int $user_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -22,6 +24,23 @@ class User extends Entity
     public function setId(?int $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->id; // Utilisation de $id comme $user_id
+    }
+
+    /**
+     * Set the value of user_id
+     *
+     * @return  self
+     */ 
+    public function setUserId(?int $user_id): self
+    {
+        $this->id = $user_id; // Utilisation de $id pour setter $user_id
 
         return $this;
     }

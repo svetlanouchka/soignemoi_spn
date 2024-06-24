@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Repository\SejourRepository;
 use App\Repository\MedecinRepository;
 use App\Repository\SpecialiteRepository;
+use App\Repository\UserRepository;
 use App\Entity\Sejour;
+use App\Entity\User;
 use App\Entity\Medecin;
 use App\Entity\Specialite;
 
@@ -42,36 +44,66 @@ class SejourController extends Controller
 
 public function createSejour()
 {
+    try {
+        // Vérifier si l'utilisateur est connecté
+        if (!User::isLogged()) {
+            throw new \Exception("Utilisateur non connecté");
+        }
 
-    $medecinRepository = new MedecinRepository();
-    $specialiteRepository = new SpecialiteRepository();
+        // Récupérer l'id de l'utilisateur connecté
+        $user_id = User::getCurrentUserId();
 
-    $medecins = $medecinRepository->findAll(); 
-    $specialites = $specialiteRepository->findAll(); 
+        // Instancier les repositories
+        $medecinRepository = new MedecinRepository();
+        $specialiteRepository = new SpecialiteRepository();
 
-    // Appel de la méthode create() avec les données nécessaires
-    $this->create($medecins, $specialites);
+        // Récupérer les données nécessaires
+        $medecins = $medecinRepository->findAll(); 
+        $specialites = $specialiteRepository->findAll(); 
+
+        // Appel de la méthode create() avec toutes les données nécessaires
+        $this->create($medecins, $specialites, $user_id);
+
+    } catch (\Exception $e) {
+        $this->render('errors/default', [
+            'error' => $e->getMessage()
+        ]);
+    }
 }
 
-
-protected function create($medecins, $specialites)
+protected function create($medecins, $specialites, $user_id)
 {
     try {
         $errors = [];
         $sejour = new Sejour();
 
+
+        // Conversion des valeurs spécificiques en entiers avant l'hydratation
+        $specialite_id = isset($_POST['specialite_id']) ? (int)$_POST['specialite_id'] : null;
+        $medecin_id = isset($_POST['medecin_id']) ? (int)$_POST['medecin_id'] : null;
+
+        // Hydratation de l'objet Sejour
+        $sejour->setSpecialite_id($specialite_id);
+        $sejour->setMedecin_id($medecin_id);
+        $sejour->setUserId($user_id);
+
         if (isset($_POST['saveSejour'])) {
             
             $sejour->hydrate($_POST);
 
-
             $errors = $sejour->validate();
+            var_dump($sejour);
+            var_dump($errors);
 
             if (empty($errors)) {
+
+                
                 $sejourRepository = new SejourRepository();
                 
                 $sejourRepository->persist($sejour);
                 header('Location: index.php?controller=page&action=home');
+            } else {
+                $errors[]="Erreur lors de l'insertion dans la base de données.";
             }
         }
 
@@ -79,6 +111,7 @@ protected function create($medecins, $specialites)
             'pageTitle' => 'Création de sejour',
             'medecins' => $medecins,
             'specialites' => $specialites,
+            'user_id' => $user_id,
             'errors' => $errors
         ]);
 
