@@ -14,6 +14,9 @@ class Sejour extends Entity
     protected ?int $specialite_id; 
     protected ?int $medecin_id;
     protected ?int $user_id = null;
+
+    protected ?Specialite $specialite = null;
+    protected ?Medecin $medecin = null;
     
     public function __construct()
     {
@@ -163,6 +166,28 @@ class Sejour extends Entity
         $this->user_id = $user_id;
 
         return $this;
+    }
+
+    public function setSpecialite(Specialite $specialite): self
+    {
+        $this->specialite = $specialite;
+        return $this;
+    }
+
+    public function getSpecialite(): ?Specialite
+    {
+        return $this->specialite;
+    }
+
+    public function setMedecin(Medecin $medecin): self
+    {
+        $this->medecin = $medecin;
+        return $this;
+    }
+
+    public function getMedecin(): ?Medecin
+    {
+        return $this->medecin;
     }
 
     public function validate(): array

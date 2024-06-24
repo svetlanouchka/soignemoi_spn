@@ -4,7 +4,7 @@
 
 <div class="container mt-5">
     <h1><?= $pageTitle; ?></h1>
-
+    <p class="lead">Planifiez et enregistrez vos séjours médicaux en sélectionnant votre médecin et spécialité, ainsi que les dates et motifs de votre consultation.</p>
     <form method="POST">
         <div class="mb-3">
             <label for="date_debut" class="form-label">Date de début</label>

@@ -28,6 +28,7 @@ class SejourController extends Controller
                     break;
                 case 'list':
                     # appeler la méthode list()
+                    $this->list();
                     break;
                 default:
                     throw new \Exception("Cette action n'existe pas : ".$_GET['action']);
@@ -130,7 +131,7 @@ protected function show()
             $id = (int)$_GET['id'];
             // Charger le sejour par un appel au repository
             $sejourRepository = new SejourRepository();
-            $sejour = $sejourRepository->findOneById($id);
+            $sejour = $sejourRepository->findByUserId($id);
 
             $this->render('sejour/show', [
                 'sejour' => $sejour,
@@ -146,6 +147,28 @@ protected function show()
     }
 
 }
+protected function list()
+    {
+        try {
+            // Vérifier si l'utilisateur est connecté
+            if (!User::isLogged()) {
+                throw new \Exception("Utilisateur non connecté");
+            }
 
+            // Récupérer l'id de l'utilisateur connecté
+            $user_id = User::getCurrentUserId();
 
+            $sejourRepository = new SejourRepository();
+            $sejours = $sejourRepository->findByUserId($user_id);
+
+            $this->render('sejour/list', [
+                'pageTitle' => 'Mes Séjours Médicaux',
+                'sejours' => $sejours
+            ]);
+        } catch (\Exception $e) {
+            $this->render('errors/default', [
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 }
