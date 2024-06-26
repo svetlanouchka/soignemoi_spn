@@ -44,6 +44,11 @@ class AuthController extends Controller
 
             $user = $userRepository->findOneByEmail($_POST['email']);
 
+            if ($user) {
+                // Affiche les informations de l'utilisateur trouvé
+                var_dump($user);
+            }
+
             if ($user && $user->verifyPassword($_POST['password'])) {
                 // Regénère l'id session pour éviter la fixation de session
                 session_regenerate_id(true);
@@ -58,6 +63,7 @@ class AuthController extends Controller
                 header('location: index.php');
             } else {
                 $errors[] = 'Email ou mot de passe incorrect';
+                var_dump($errors);
             }
         }
 

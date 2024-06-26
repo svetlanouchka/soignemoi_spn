@@ -120,4 +120,22 @@ class Medecin extends Entity
 
         return $this;
     }
+
+    public function validate(): array
+    {
+        $errors = [];
+        if (empty($this->getPrenom())) {
+            $errors['prenom'] = 'Le champ prénom ne doit pas être vide';
+        }
+        if (empty($this->getNom())) {
+            $errors['nom'] = 'Le champ nom ne doit pas être vide';
+        }
+        if (empty($this->getSpecialite_id())) {
+            $errors['specialite_id'] = 'Le champ specialité ne doit pas être vide';
+        } 
+        if (empty($this->getMatricule())) {
+            $errors['matricule'] = 'Le champ mot de passe ne doit pas être vide';
+        }
+        return $errors;
+    }
 } 

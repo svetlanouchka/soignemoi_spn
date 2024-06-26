@@ -6,8 +6,10 @@ use App\Repository\SejourRepository;
 use App\Repository\MedecinRepository;
 use App\Repository\SpecialiteRepository;
 use App\Repository\UserRepository;
+use App\Repository\PlanningRepository;
 use App\Entity\Sejour;
 use App\Entity\User;
+use App\Entity\Planning;
 use App\Entity\Medecin;
 use App\Entity\Specialite;
 
@@ -24,6 +26,7 @@ class SejourController extends Controller
                     break;
                 case 'create':
                     # appeler la méthode create()
+                    $this->checkAdmin();
                     $this->createSejour();
                     break;
                 case 'list':
@@ -100,13 +103,29 @@ protected function create($medecins, $specialites, $user_id)
 
                 
                 $sejourRepository = new SejourRepository();
+
+                $planningRepository = new PlanningRepository();
+
+                $planningDate = new \DateTime($_POST['date_debut']);
+                $patientCount = $planningRepository->countPatientsByMedecinAndDate($sejour->getMedecin_Id(), $planningDate);
+
+                if ($patientCount >= 5) {
+                    $errors[] = "Le médecin a atteint le nombre maximum de patients pour cette journée.";
+                }
+
+                if (empty($errors)) {
                 
                 $sejourRepository->persist($sejour);
+
+                $this->addSejourToPlanning($sejour, $planningDate);
+
                 header('Location: index.php?controller=page&action=home');
+                exit;
             } else {
                 $errors[]="Erreur lors de l'insertion dans la base de données.";
             }
         }
+    }
 
         $this->render('sejour/creation_sejour', [
             'pageTitle' => 'Création de sejour',
@@ -123,6 +142,24 @@ protected function create($medecins, $specialites, $user_id)
     } 
 
 }
+
+private function addSejourToPlanning(Sejour $sejour, \DateTime $date)
+    {
+        $planningRepository = new PlanningRepository();
+
+        $planning = $planningRepository->findByMedecinIdAndDate($sejour->getMedecin_Id(), $date);
+
+        if ($planning) {
+            $planning->setNombrePatients($planning->getNombrePatients() + 1);
+        } else {
+            $planning = new Planning();
+            $planning->setMedecinId($sejour->getMedecin_Id());
+            $planning->setDate($date);
+            $planning->setNombrePatients(1);
+        }
+
+        $planningRepository->save($planning);
+    }
 protected function show()
 {
     try {
@@ -171,4 +208,11 @@ protected function list()
             ]);
         }
     }
+    private function checkAdmin(): void
+    {
+        if ($_SESSION['user_role'] !== 'admin') {
+            throw new \Exception("Accès non autorisé");
+        }
+    }
 }
+

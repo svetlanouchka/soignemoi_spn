@@ -58,6 +58,16 @@ class SejourRepository extends Repository
                 return $sejours;
             }
 
+    public function countPatientsByMedecinAndDate(int $medecinId, \DateTime $date): int
+            {
+                $query = $this->pdo->prepare("SELECT COUNT(*) FROM sejours WHERE medecin_id = :medecin_id AND date = :date");
+                $query->bindParam(':medecin_id', $medecinId, $this->pdo::PARAM_INT);
+                $query->bindParam(':date', $date->format('Y-m-d'), $this->pdo::PARAM_STR);
+                $query->execute();
+        
+                return (int) $query->fetchColumn();
+            }
+
     public function persist(Sejour $sejour)
     {
         

@@ -33,6 +33,11 @@ Class Controller
                         $controller = new SejourController();
                         $controller->route();
                         break;
+                    case 'admin':
+                        # charger controleur Admin
+                        $controller = new AdminController();
+                        $controller->route();
+                        break;
                     default:
                         throw new \Exception("Le controleur n'existe pas");
                 }

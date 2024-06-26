@@ -21,7 +21,6 @@ if (!isset($_SESSION['user'])) {
     $user_id = $_SESSION['user']['id'];
 }
 
-var_dump($_SESSION['user']);
 define('_ROOTPATH_', __DIR__);
 
 spl_autoload_register();

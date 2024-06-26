@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\MedecinRepository;
-use App\Entity\Medecin;
+
 class MedecinController extends Controller
 
 {
@@ -13,18 +13,9 @@ class MedecinController extends Controller
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
                     case 'show':
-                        # appeler la méthode about()
+                        # appeler la méthode show
                         $this->show();
                         break;
-                    case 'create':
-                        # appeler la méthode about()
-                        break;
-                    case 'list':
-                        # charger controleur home
-                        break;
-                    case 'add_planning':
-                            # appeler la méthode about()
-                            break;
                     default:
                         throw new \Exception("Cette action n'existe pas : ".$_GET['action']);
                 }

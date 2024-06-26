@@ -31,7 +31,42 @@ class MedecinRepository extends Repository
                 
                 return $medecins;
             }
-        
+
+            public function save(Medecin $medecin): bool
+                {
+                    if ($medecin->getId()) {
+                        // Update existing medecin
+                        $query = $this->pdo->prepare("UPDATE medecins SET nom = :nom, prenom = :prenom, specialite = :specialite, matricule = :matricule WHERE id = :id");
+                        $query->bindParam(':id', $medecin->getId(), $this->pdo::PARAM_INT);
+                    } else {
+                        // Insert new medecin
+                        $query = $this->pdo->prepare("INSERT INTO medecins (nom, prenom, specialite_id, matricule) VALUES (:nom, :prenom, :specialite_id, :matricule)");
+                    }
+                    
+                    $query->bindParam(':nom', $medecin->getNom(), $this->pdo::PARAM_STR);
+                    $query->bindParam(':prenom', $medecin->getPrenom(), $this->pdo::PARAM_STR);
+                    $query->bindParam(':specialite', $medecin->getSpecialite_id(), $this->pdo::PARAM_INT);
+                    $query->bindParam(':matricule', $medecin->getMatricule(), $this->pdo::PARAM_STR);
+                    
+                    return $query->execute();
+                }
+
+                public function update(Medecin $medecin): void
+                    {
+                        $query = $this->pdo->prepare("UPDATE medecins SET nom = :nom, prenom = :prenom, specialite = :specialite, matricule = :matricule WHERE id = :id");
+                        $query->bindParam(':id', $medecin->getId(), $this->pdo::PARAM_INT);
+                        $query->bindParam(':nom', $medecin->getNom(), $this->pdo::PARAM_STR);
+                        $query->bindParam(':prenom', $medecin->getPrenom(), $this->pdo::PARAM_STR);
+                        $query->bindParam(':specialite', $medecin->getSpecialite_id(), $this->pdo::PARAM_INT);
+                        $query->bindParam(':matricule', $medecin->getMatricule(), $this->pdo::PARAM_STR);
+                        $query->execute();
+                    }
+                    public function delete(int $id): void
+                    {
+                        $query = $this->pdo->prepare("DELETE FROM medecins WHERE id = :id");
+                        $query->bindParam(':id', $id, $this->pdo::PARAM_INT);
+                        $query->execute();
+                    }
         // Appel bdd
         /*$mysql = Mysql::getInstance();
 
