@@ -8,6 +8,7 @@ class Medecin extends Entity
     protected string $nom;
     protected string $prenom;
     protected int $specialite_id;
+    protected ?string $specialite_name = null;
     protected string $matricule; 
 
     public function __construct(
@@ -119,6 +120,20 @@ class Medecin extends Entity
         $this->matricule = $matricule;
 
         return $this;
+    }
+
+    public function getSpecialiteName(): ?string
+    {
+        return $this->specialite_name;
+    }
+
+    public function setSpecialiteName(?string $specialite_name): void
+    {
+        $this->specialite_name = $specialite_name;
+    }
+    public function getNomComplet(): string
+    {
+        return $this->prenom . ' ' . $this->nom;
     }
 
     public function validate(): array

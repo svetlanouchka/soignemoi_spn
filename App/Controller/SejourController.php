@@ -26,7 +26,6 @@ class SejourController extends Controller
                     break;
                 case 'create':
                     # appeler la méthode create()
-                    $this->checkAdmin();
                     $this->createSejour();
                     break;
                 case 'list':
@@ -143,22 +142,22 @@ protected function create($medecins, $specialites, $user_id)
 
 }
 
-private function addSejourToPlanning(Sejour $sejour, \DateTime $date)
+private function addSejourToPlanning(Sejour $sejour, \DateTime $date_i)
     {
         $planningRepository = new PlanningRepository();
 
-        $planning = $planningRepository->findByMedecinIdAndDate($sejour->getMedecin_Id(), $date);
+        $planning = $planningRepository->findByMedecinIdAndDate($sejour->getMedecin_Id(), $date_i);
 
         if ($planning) {
             $planning->setNombrePatients($planning->getNombrePatients() + 1);
         } else {
             $planning = new Planning();
             $planning->setMedecinId($sejour->getMedecin_Id());
-            $planning->setDate($date);
+            $planning->setDate_i($date_i);
             $planning->setNombrePatients(1);
         }
 
-        $planningRepository->save($planning);
+        $planningRepository->save($planning, $date_i);
     }
 protected function show()
 {
@@ -208,11 +207,11 @@ protected function list()
             ]);
         }
     }
-    private function checkAdmin(): void
+/*    private function checkAdmin(): void
     {
         if ($_SESSION['user_role'] !== 'admin') {
             throw new \Exception("Accès non autorisé");
         }
-    }
+    }*/
 }
 

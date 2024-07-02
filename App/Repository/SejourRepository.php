@@ -58,32 +58,64 @@ class SejourRepository extends Repository
                 return $sejours;
             }
 
-    public function countPatientsByMedecinAndDate(int $medecinId, \DateTime $date): int
+    public function countPatientsByMedecinAndDate(int $medecinId, \DateTime $date_i): int
             {
-                $query = $this->pdo->prepare("SELECT COUNT(*) FROM sejours WHERE medecin_id = :medecin_id AND date = :date");
+                $query = $this->pdo->prepare("SELECT COUNT(*) FROM sejours WHERE medecin_id = :medecin_id AND date_i = :date_i");
                 $query->bindParam(':medecin_id', $medecinId, $this->pdo::PARAM_INT);
-                $query->bindParam(':date', $date->format('Y-m-d'), $this->pdo::PARAM_STR);
+                $query->bindParam(':date_i', $date_i, $this->pdo::PARAM_STR);
                 $query->execute();
         
                 return (int) $query->fetchColumn();
             }
 
-    public function persist(Sejour $sejour)
-    {
-        
-            $query = $this->pdo->prepare('INSERT INTO sejours (date_debut, date_fin, motif, specialite_id, medecin_id, user_id) 
-                                                    VALUES (:date_debut, :date_fin, :motif, :specialite_id, :medecin_id, :user_id)'
-            );
-        
-            $dateDebut = $sejour->getDate_debut()->format('Y-m-d H:i:s');
-            $dateFin = $sejour->getDate_fin()->format('Y-m-d H:i:s');
-        
-            $query->bindValue(':date_debut', $dateDebut, $this->pdo::PARAM_STR);
-            $query->bindValue(':date_fin', $dateFin, $this->pdo::PARAM_STR);
-            $query->bindValue(':motif', $sejour->getMotif(), $this->pdo::PARAM_STR);
-            $query->bindValue(':specialite_id', $sejour->getSpecialite_id(), $this->pdo::PARAM_INT);
-            $query->bindValue(':medecin_id', $sejour->getMedecin_id(), $this->pdo::PARAM_INT);
-            $query->bindValue(':user_id', $sejour->getUserid(), $this->pdo::PARAM_INT);
-        return $query->execute();
-    }
+    public function persist(Sejour $sejour): bool
+            {
+                $query = $this->pdo->prepare(
+                    'INSERT INTO sejours (date_debut, date_fin, motif, specialite_id, medecin_id, user_id) 
+                    VALUES (:date_debut, :date_fin, :motif, :specialite_id, :medecin_id, :user_id)'
+                );
+            
+                $dateDebut = $sejour->getDate_debut()->format('Y-m-d H:i:s');
+                $dateFin = $sejour->getDate_fin()->format('Y-m-d H:i:s');
+            
+                $query->bindValue(':date_debut', $dateDebut, $this->pdo::PARAM_STR);
+                $query->bindValue(':date_fin', $dateFin, $this->pdo::PARAM_STR);
+                $query->bindValue(':motif', $sejour->getMotif(), $this->pdo::PARAM_STR);
+                $query->bindValue(':specialite_id', $sejour->getSpecialite_id(), $this->pdo::PARAM_INT);
+                $query->bindValue(':medecin_id', $sejour->getMedecin_id(), $this->pdo::PARAM_INT);
+                $query->bindValue(':user_id', $sejour->getUserId(), $this->pdo::PARAM_INT);
+            
+                $result = $query->execute();
+            
+                if ($result) {
+                    $sejour->setId($this->pdo->lastInsertId());
+                    $this->addToPlanningMedecins($sejour);
+                }
+            
+                return $result;
+            }
+            
+    private function addToPlanningMedecins(Sejour $sejour): void
+            {
+                $startDate = $sejour->getDate_debut();
+                $endDate = $sejour->getDate_fin();
+                $interval = $startDate->diff($endDate)->days + 1;
+            
+                for ($i = 0; $i < $interval; $i++) {
+                    $currentDate = clone $startDate;
+                    $currentDate->modify("+{$i} days");
+            
+                    $query = $this->pdo->prepare(
+                        "INSERT INTO planning_medecins (medecin_id, sejour_id, date_i, nombre_patients) 
+                        VALUES (:medecin_id, :sejour_id, :date_i, :nombre_patients)"
+                    );
+            
+                    $query->bindValue(':medecin_id', $sejour->getMedecin_id(), $this->pdo::PARAM_INT);
+                    $query->bindValue(':sejour_id', $sejour->getId(), $this->pdo::PARAM_INT);
+                    $query->bindValue(':date_i', $currentDate->format('Y-m-d'), $this->pdo::PARAM_STR);
+                    $query->bindValue(':nombre_patients', 1, $this->pdo::PARAM_INT);
+            
+                    $query->execute();
+                }
+            }
 }

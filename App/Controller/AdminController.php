@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Repository\MedecinRepository;
 use App\Entity\Medecin;
 use App\Repository\PlanningRepository;
+use App\Repository\SpecialiteRepository;
+use App\Repository\SejourRepository;
 use App\Entity\Planning;
 class AdminController extends Controller
 {
@@ -33,6 +35,9 @@ class AdminController extends Controller
                         $this->checkAdmin();
                         $this->addPlanning();
                         break;
+                    case 'viewPlanningByMedecinId':
+                        $this->checkAdmin();
+                        $this->viewPlanningByMedecinId((int)$_GET['medecin_id']);
                     case 'dashboard':
                         $this->checkAdmin();
                         $this->dashboard();
@@ -65,10 +70,13 @@ class AdminController extends Controller
             $errors = [];
             $medecin = new Medecin();
 
+            $specialiteRepository = new SpecialiteRepository();
+            $specialites = $specialiteRepository->findAll();
+
             if (isset($_POST['saveMedecin'])) {
                 $medecin->setNom($_POST['nom']);
                 $medecin->setPrenom($_POST['prenom']);
-                $medecin->setSpecialite_id($_POST['specialite']);
+                $medecin->setSpecialite_id($_POST['specialite_id']);
                 $medecin->setMatricule($_POST['matricule']);
 
                 $errors = $medecin->validate();
@@ -76,13 +84,14 @@ class AdminController extends Controller
                 if (empty($errors)) {
                     $medecinRepository = new MedecinRepository();
                     $medecinRepository->save($medecin);
-                    header('Location: index.php?controller=medecin&action=list');
+                    header('Location: index.php?controller=admin&action=viewMedecins');
                     exit;
                 }
             }
 
             $this->render('admin/add_edit', [
-                'medecin' => '',
+                'medecin' => $medecin,
+                'specialites' => $specialites,
                 'pageTitle' => 'Créer un médecin',
                 'errors' => $errors
             ]);
@@ -97,8 +106,8 @@ class AdminController extends Controller
     {
         try {
             $medecinRepository = new MedecinRepository();
-            $medecins = $medecinRepository->findAll();
-
+            $medecins = $medecinRepository->findAllWithSpecialites();
+            
             $this->render('admin/list', [
                 'medecins' => $medecins,
                 'pageTitle' => 'Liste des médecins'
@@ -114,19 +123,19 @@ class AdminController extends Controller
         try {
             if (isset($_POST['savePlanning'])) {
                 $medecin_id = $_POST['medecin_id'];
-                $date = new \DateTime($_POST['date']);
+                $date_i = new \DateTime($_POST['date_i']);
                 $planningRepository = new PlanningRepository();
 
-                $planning = $planningRepository->findByMedecinIdAndDate($medecin_id, $date);
+                $planning = $planningRepository->findByMedecinIdAndDate($medecin_id, $date_i);
 
                 if ($planning === null) {
                     $planning = new Planning();
                     $planning->setMedecinId($medecin_id);
-                    $planning->setDate($date);
+                    $planning->setDate_i($date_i);
                 }
 
                 $planning->setNombrePatients($_POST['nombre_patients']);
-                $planningRepository->save($planning);
+                $planningRepository->save($planning, $date_i);
 
                 header('Location: index.php?controller=medecin&action=planning&medecin_id=' . $medecin_id);
                 exit;
@@ -215,4 +224,33 @@ class AdminController extends Controller
             ]);
         }
 }
+
+protected function viewPlanningByMedecinId(int $medecin_id): void
+{
+    try {
+        // Récupérer le médecin à partir de l'ID
+        $medecinRepository = new MedecinRepository();
+        $medecin = $medecinRepository->findOneById($medecin_id);
+
+        if (!$medecin) {
+            throw new \Exception("Médecin non trouvé avec l'ID : " . $medecin_id);
+        }
+
+        // Récupérer les plannings associés à ce médecin
+        $planningRepository = new PlanningRepository();
+        $plannings = $planningRepository->findByMedecinId($medecin_id);
+
+        // Rendre la vue avec les données récupérées
+        $this->render('admin/view_planning', [
+            'plannings' => $plannings,
+            'medecin' => $medecin,
+            'pageTitle' => 'Planning du médecin ' . $medecin->getNomComplet()
+        ]);
+    } catch (\Exception $e) {
+        $this->render('errors/default', [
+            'error' => $e->getMessage()
+        ]);
+    }
 }
+}
+

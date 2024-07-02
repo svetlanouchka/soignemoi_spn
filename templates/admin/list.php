@@ -21,11 +21,12 @@
                     <td><?= htmlspecialchars($medecin->getId()) ?></td>
                     <td><?= htmlspecialchars($medecin->getNom()) ?></td>
                     <td><?= htmlspecialchars($medecin->getPrenom()) ?></td>
-                    <td><?= htmlspecialchars($medecin->getSpecialite_id()) ?></td>
+                    <td><?= htmlspecialchars($medecin->getSpecialiteName()) ?></td>
                     <td><?= htmlspecialchars($medecin->getMatricule()) ?></td>
                     <td>
                         <a href="index.php?controller=medecin&action=edit&id=<?= $medecin->getId() ?>" class="btn btn-warning">Modifier</a>
                         <a href="index.php?controller=medecin&action=delete&id=<?= $medecin->getId() ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce médecin ?')">Supprimer</a>
+                        <a href="index.php?controller=admin&action=viewPlanningByMedecinId&medecin_id=<?= htmlspecialchars($medecin->getId()) ?>">Voir Planning</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

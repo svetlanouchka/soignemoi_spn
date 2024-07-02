@@ -38,8 +38,9 @@ use App\Tools\NavigationTools;
         <?php } else { ?>
             <li><a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=auth&action=login" class="nav-link px-2" <?= NavigationTools::addActiveClass('auth', 'login') ?>>Votre séjour chez nous</a></li>
         <?php } ?>
-        <li><a href="#" class="nav-link px-2">Espace admin</a></li>
-        <li><a href="#" class="nav-link px-2">A propos</a></li>
+        <?php if (USer::isAdmin()){ ?>
+            <li><a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=admin&action=dashboard" class="nav-link px-2">Espace admin</a></li>
+            <?php } ?>        
         </ul>
 
         <div class="col-md-3 text-end">

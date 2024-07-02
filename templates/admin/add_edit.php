@@ -12,9 +12,17 @@
             <label for="prenom">Prénom</label>
             <input type="text" class="form-control" id="prenom" name="prenom" required>
         </div>
-        <div class="form-group">
-            <label for="specialite">Spécialité</label>
-            <input type="text" class="form-control" id="specialite" name="specialite" required>
+        <div class="mb-3">
+            <label for="specialite_id" class="form-label">Spécialité</label>
+            <select name="specialite_id" id="specialite_id" class="form-control <?= (isset($errors['specialite_id']) ? 'is-invalid' : '') ?>">
+                <option value="">Choisir une spécialité</option>
+                <?php foreach ($specialites as $specialite) { ?>
+                    <option value="<?= $specialite->getId() ?>"><?= $specialite->getName() ?> </option>
+                <?php } ?>
+            </select>
+            <?php if (isset($errors['specialite_id'])) { ?>
+                <div class="invalid-feedback"><?= $errors['specialite_id'] ?></div>
+            <?php } ?>
         </div>
         <div class="form-group">
             <label for="matricule">Matricule</label>

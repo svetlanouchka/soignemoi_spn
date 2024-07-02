@@ -6,7 +6,10 @@ class Planning extends Entity
 {
     protected ?int $id = null;
     protected int $medecin_id;
-    protected \DateTime $date;
+
+    protected int $sejour_id;
+    
+    protected \DateTime $date_i;
     protected int $nombre_patients = 0;
 
     // Getters and setters
@@ -20,9 +23,9 @@ class Planning extends Entity
         return $this->medecin_id;
     }
 
-    public function getDate(): \DateTime
+    public function getDate_i(): \DateTime
     {
-        return $this->date;
+        return $this->date_i;
     }
 
     public function getNombrePatients(): int
@@ -40,13 +43,33 @@ class Planning extends Entity
         $this->medecin_id = $medecin_id;
     }
 
-    public function setDate(\DateTime $date): void
+    public function setDate_i(\DateTime $date_i): void
     {
-        $this->date = $date;
+        $this->date_i = $date_i;
     }
 
     public function setNombrePatients(int $nombre_patients): void
     {
         $this->nombre_patients = $nombre_patients;
+    }
+
+    /**
+     * Get the value of sejour_id
+     */ 
+    public function getSejour_id()
+    {
+        return $this->sejour_id;
+    }
+
+    /**
+     * Set the value of sejour_id
+     *
+     * @return  self
+     */ 
+    public function setSejour_id($sejour_id)
+    {
+        $this->sejour_id = $sejour_id;
+
+        return $this;
     }
 }
