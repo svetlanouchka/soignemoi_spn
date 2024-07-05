@@ -24,8 +24,8 @@ class Sejour extends Entity
         $this->date_debut = new DateTime();
         $this->date_fin = new DateTime();
         $this->motif = '';
-        $this->specialite_id = 0;
-        $this->medecin_id = 0;
+        $this->specialite_id = null;
+        $this->medecin_id = null;
     }
 
     /**
@@ -59,13 +59,12 @@ class Sejour extends Entity
     /**
      * Set the value of date_debut
      *
-     * @return  self
+     * 
      */ 
-    public function setDate_debut(DateTime $date_debut) : self
+    public function setDatedebut(DateTime $date_debut) : void
     {
         $this->date_debut = $date_debut;
 
-        return $this;
     }
 
     /**
@@ -79,13 +78,11 @@ class Sejour extends Entity
     /**
      * Set the value of date_fin
      *
-     * @return  self
      */ 
-    public function setDate_fin(DateTime $date_fin) : self
+    public function setDatefin(DateTime $date_fin) : void
     {
         $this->date_fin = $date_fin;
 
-        return $this;
     }
 
     /**

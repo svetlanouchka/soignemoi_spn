@@ -1,6 +1,8 @@
 <?php require_once _ROOTPATH_ . '\templates\header.php';
 /** @var \App\Entity\Sejour $sejour */
 ?>
+
+<div class="container mt-5">
 <h1><?= htmlspecialchars($pageTitle) ?></h1>
 
 <h2>Médecin: <?= htmlspecialchars($medecin->getNomComplet()) ?></h2>
@@ -22,6 +24,7 @@
     </tbody>
 </table>
 
-<a href="index.php?controller=admin&action=viewMedecins">Retour à la liste des médecins</a>
 
+<a href="index.php?controller=admin&action=viewMedecins">Retour à la liste des médecins</a>
+</div>
 <?php require_once _ROOTPATH_ . '\templates\footer.php' ?>

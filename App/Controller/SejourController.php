@@ -32,6 +32,10 @@ class SejourController extends Controller
                     # appeler la méthode list()
                     $this->list();
                     break;
+                case 'confirmation':
+                    # appeler la méthode confirmation
+                    $this->confirmation();
+                    break;
                 default:
                     throw new \Exception("Cette action n'existe pas : ".$_GET['action']);
             }
@@ -91,12 +95,11 @@ protected function create($medecins, $specialites, $user_id)
         $sejour->setUserId($user_id);
 
         if (isset($_POST['saveSejour'])) {
+
             
             $sejour->hydrate($_POST);
 
             $errors = $sejour->validate();
-            var_dump($sejour);
-            var_dump($errors);
 
             if (empty($errors)) {
 
@@ -117,8 +120,8 @@ protected function create($medecins, $specialites, $user_id)
                 $sejourRepository->persist($sejour);
 
                 $this->addSejourToPlanning($sejour, $planningDate);
-
-                header('Location: index.php?controller=page&action=home');
+                $_SESSION['flash_message'] = "Votre séjour a bien été créé !";
+                header('Location: index.php?controller=sejour&action=confirmation');
                 exit;
             } else {
                 $errors[]="Erreur lors de l'insertion dans la base de données.";
@@ -141,6 +144,28 @@ protected function create($medecins, $specialites, $user_id)
     } 
 
 }
+
+public function confirmation()
+{
+    if (!isset($_SESSION['flash_message'])) {
+        // Rediriger vers une autre page si aucun message n'est présent en session
+        header('Location: index.php?controller=page&action=home');
+        exit;
+    }
+
+    // Récupérer le message flash et l'afficher
+    $flashMessage = $_SESSION['flash_message'];
+    unset($_SESSION['flash_message']); // Supprimer le message après l'affichage
+
+    // Ici, vous pouvez récupérer la liste des séjours de l'utilisateur et les passer à la vue si nécessaire
+
+    $this->render('sejour/confirmation', [
+        'pageTitle' => 'Confirmation de création de séjour',
+        'flashMessage' => $flashMessage,
+        // Autres données à passer à la vue si nécessaire
+    ]);
+}
+
 
 private function addSejourToPlanning(Sejour $sejour, \DateTime $date_i)
     {
