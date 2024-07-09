@@ -55,31 +55,35 @@ class MedecinRepository extends Repository
             {
                 if ($medecin->getId() === null) {
                     $query = $this->pdo->prepare(
-                        "INSERT INTO medecin (nom, prenom, specialite_id, matricule) VALUES (:nom, :prenom, :specialite_id, :matricule)"
+                        "INSERT INTO medecin (nom, prenom, email, specialite_id, matricule) VALUES (:nom, :prenom, :email, :specialite_id, :matricule)"
                     );
                     $nom = $medecin->getNom();
                     $prenom = $medecin->getPrenom();
+                    $email = $medecin->getEmail();
                     $specialite_id = $medecin->getSpecialite_id();
                     $matricule = $medecin->getMatricule();
         
                     $query->bindParam(':nom', $nom, $this->pdo::PARAM_STR);
                     $query->bindParam(':prenom', $prenom, $this->pdo::PARAM_STR);
+                    $query->bindParam(':email', $email, $this->pdo::PARAM_STR);
                     $query->bindParam(':specialite_id', $specialite_id, $this->pdo::PARAM_INT);
                     $query->bindParam(':matricule', $matricule, $this->pdo::PARAM_STR);
                     $query->execute();
                     $medecin->setId($this->pdo->lastInsertId());
                 } else {
                     $query = $this->pdo->prepare(
-                        "UPDATE medecin SET nom = :nom, prenom = :prenom, specialite_id = :specialite_id, matricule = :matricule WHERE id = :id"
+                        "UPDATE medecin SET nom = :nom, prenom = :prenom, email = :email, specialite_id = :specialite_id, matricule = :matricule WHERE id = :id"
                     );
                     $id = $medecin->getId();
                     $nom = $medecin->getNom();
                     $prenom = $medecin->getPrenom();
+                    $email = $medecin->getEmail();
                     $specialite_id = $medecin->getSpecialite_id();
                     $matricule = $medecin->getMatricule();
         
                     $query->bindParam(':nom', $nom, $this->pdo::PARAM_STR);
                     $query->bindParam(':prenom', $prenom, $this->pdo::PARAM_STR);
+                    $query->bindParam(':email', $email, $this->pdo::PARAM_STR);
                     $query->bindParam(':specialite_id', $specialite_id, $this->pdo::PARAM_INT);
                     $query->bindParam(':matricule', $matricule, $this->pdo::PARAM_STR);
                     $query->bindParam(':id', $id, $this->pdo::PARAM_INT);
@@ -88,10 +92,11 @@ class MedecinRepository extends Repository
             }
                 public function update(Medecin $medecin): void
                     {
-                        $query = $this->pdo->prepare("UPDATE medecin SET nom = :nom, prenom = :prenom, specialite = :specialite, matricule = :matricule WHERE id = :id");
+                        $query = $this->pdo->prepare("UPDATE medecin SET nom = :nom, prenom = :prenom, email = :email, specialite = :specialite, matricule = :matricule WHERE id = :id");
                         $query->bindParam(':id', $id, $this->pdo::PARAM_INT);
                         $query->bindParam(':nom', $nom, $this->pdo::PARAM_STR);
                         $query->bindParam(':prenom', $prenom, $this->pdo::PARAM_STR);
+                        $query->bindParam(':email', $email, $this->pdo::PARAM_STR);
                         $query->bindParam(':specialite', $specialite_id, $this->pdo::PARAM_INT);
                         $query->bindParam(':matricule', $matricule, $this->pdo::PARAM_STR);
                         $query->execute();
@@ -102,21 +107,4 @@ class MedecinRepository extends Repository
                         $query->bindParam(':id', $id, $this->pdo::PARAM_INT);
                         $query->execute();
                     }
-        // Appel bdd
-        /*$mysql = Mysql::getInstance();
-
-        $pdo = $mysql->getPDO();
-        
-        $query = $pdo->prepare('SELECT $ ')
-
-        $medecin = ['id' => 1, 'nom' => 'nomtest', 'prenom' => 'prenomtest', 'specialite' => 'specialitetest', 'matricule' => 'matriculetest'];
-
-        $medecinEntity = new Medecin();
-        $medecinEntity->setId($medecin['id']);
-        $medecinEntity->setNom($medecin['nom']);
-        $medecinEntity->setPrenom($medecin['prenom']);
-        $medecinEntity->setSpecialite($medecin['specialite']);
-        $medecinEntity->setMatricule($medecin['matricule']);
-
-        return $medecinEntity;*/
-    }
+                }

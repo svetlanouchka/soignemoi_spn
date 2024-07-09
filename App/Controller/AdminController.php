@@ -7,7 +7,11 @@ use App\Entity\Medecin;
 use App\Repository\PlanningRepository;
 use App\Repository\SpecialiteRepository;
 use App\Repository\SejourRepository;
+use App\Repository\UserRepository;
 use App\Entity\Planning;
+use App\Entity\User;
+use App\Db\Mysql;
+
 class AdminController extends Controller
 {
     public function route(): void
@@ -56,6 +60,7 @@ class AdminController extends Controller
         }
     }
 
+
     protected function dashboard(): void
     {
         $this->render('admin/dashboard', [
@@ -64,7 +69,7 @@ class AdminController extends Controller
     }
 
 
-    protected function createMedecin(): void
+    /*protected function createMedecin(): void
     {
         try {
             $errors = [];
@@ -82,13 +87,91 @@ class AdminController extends Controller
                 $errors = $medecin->validate();
 
                 if (empty($errors)) {
-                    $medecinRepository = new MedecinRepository();
+                    $medecinRepository = new MedecinRepository;
                     $medecinRepository->save($medecin);
                     header('Location: index.php?controller=admin&action=viewMedecins');
                     exit;
                 }
             }
 
+            $this->render('admin/add_edit', [
+                'medecin' => $medecin,
+                'specialites' => $specialites,
+                'pageTitle' => 'Créer un médecin',
+                'errors' => $errors
+            ]);
+        } catch (\Exception $e) {
+            $this->render('errors/default', [
+                'error' => $e->getMessage()
+            ]);
+        }
+    }*/
+    protected function createMedecin(): void
+    {
+        try {
+            $errors = [];
+            $medecin = new Medecin();
+            $specialiteRepository = new SpecialiteRepository();
+            $specialites = $specialiteRepository->findAll();
+    
+            if (isset($_POST['saveMedecin'])) {
+
+                var_dump($_POST);
+                $nom = $_POST['nom'] ?? null;
+                $prenom = $_POST['prenom'] ?? null;
+                $specialite_id = $_POST['specialite_id'] ?? null;
+                $matricule = $_POST['matricule'] ?? null;
+                $email = $_POST['email'] ?? null;
+                $password = $_POST['password'] ?? null;
+
+                var_dump($nom, $prenom, $specialite_id, $matricule, $email, $password);
+
+            if (!$nom || !$prenom || !$specialite_id || !$matricule || !$email || !$password) {
+                $errors[] = "Tous les champs doivent être remplis.";
+            } else {
+                $medecin->setNom($nom);
+                $medecin->setPrenom($prenom);
+                $medecin->setEmail($email);
+                $medecin->setSpecialite_id($specialite_id);
+                $medecin->setMatricule($matricule);
+
+                $errors = array_merge($errors, $medecin->validate());
+                var_dump($errors);
+
+    
+                if (empty($errors)) {
+                    $pdo = Mysql::getInstance()->getPDO(); // Get the PDO instance
+                    $medecinRepository = new MedecinRepository;
+                    $userRepository = new UserRepository;
+    
+                    // Begin transaction
+                    $pdo->beginTransaction();
+                    try {
+                        // Save the medecin
+                        $medecinRepository->save($medecin);
+    
+                        // Save the user
+                        $user = new User();
+                        $user->setPrenom($prenom);
+                        $user->setNom($nom);
+                        $user->setEmail($email);
+                        $user->setPassword($password); // hashing will be done in UserRepository
+                        $user->setRole('medecin');
+                        $userRepository->persist($user);
+    
+                        // Commit transaction
+                        $pdo->commit();
+                        header('Location: index.php?controller=admin&action=viewMedecins');
+                        exit;
+                    } catch (\Exception $e) {
+                        // Rollback transaction
+                        $pdo->rollBack();
+                        $errors[] = "Erreur lors de l'ajout du médecin : " . $e->getMessage();
+                    }
+                }
+            }
+        }
+        var_dump($errors);
             $this->render('admin/add_edit', [
                 'medecin' => $medecin,
                 'specialites' => $specialites,

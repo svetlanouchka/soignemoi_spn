@@ -7,6 +7,8 @@ class Medecin extends Entity
     protected ?int $id = null;
     protected string $nom;
     protected string $prenom;
+
+    protected string $email;
     protected int $specialite_id;
     protected ?string $specialite_name = null;
     protected string $matricule; 
@@ -152,5 +154,25 @@ class Medecin extends Entity
             $errors['matricule'] = 'Le champ mot de passe ne doit pas être vide';
         }
         return $errors;
+    }
+
+    /**
+     * Get the value of email
+     */ 
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */ 
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
     }
 } 

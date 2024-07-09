@@ -39,7 +39,6 @@ protected function show()
 
             $medecinRepository = new MedecinRepository();
             $medecin = $medecinRepository->findOneById($id);
-            var_dump($medecin);
             
             $this->render('medecin/show', [
                 'medecin' => $medecin,

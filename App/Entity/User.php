@@ -9,8 +9,8 @@ class User extends Entity
     protected ?int $id = null;
     protected ?string $email = '';
     protected ?string $password = '';
-    protected ?string $first_name = '';
-    protected ?string $last_name = '';
+    protected ?string $prenom = '';
+    protected ?string $nom = '';
     protected ?string $adress = ''; 
     protected ?string $role = '';
 
@@ -69,26 +69,26 @@ class User extends Entity
         return $this;
     }
 
-    public function getFirstName(): ?string
+    public function getPrenom(): ?string
     {
-        return $this->first_name;
+        return $this->prenom;
     }
 
-    public function setFirstName(?string $first_name): self
+    public function setPrenom(?string $prenom): self
     {
-        $this->first_name = $first_name;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function getNom(): ?string
     {
-        return $this->last_name;
+        return $this->nom;
     }
 
-    public function setLastName(?string $last_name): self
+    public function setNom(?string $nom): self
     {
-        $this->last_name = $last_name;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -117,11 +117,11 @@ class User extends Entity
     public function validate(): array
     {
         $errors = [];
-        if (empty($this->getFirstName())) {
-            $errors['first_name'] = 'Le champ prénom ne doit pas être vide';
+        if (empty($this->getPrenom())) {
+            $errors['prenom'] = 'Le champ prénom ne doit pas être vide';
         }
-        if (empty($this->getLastName())) {
-            $errors['last_name'] = 'Le champ nom ne doit pas être vide';
+        if (empty($this->getNom())) {
+            $errors['nom'] = 'Le champ nom ne doit pas être vide';
         }
         if (empty($this->getEmail())) {
             $errors['email'] = 'Le champ email ne doit pas être vide';
@@ -170,6 +170,12 @@ class User extends Entity
     {
         return isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin';
     }
+
+    public static function isMedecin(): bool
+    {
+        return isset($_SESSION['user']) && $_SESSION['user']['role'] === 'medecin';
+    }
+
 
     /*
         Pourrait être déplacé dans une classe Security

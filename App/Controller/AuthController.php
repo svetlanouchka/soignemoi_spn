@@ -56,8 +56,8 @@ class AuthController extends Controller
                     'id' => $user->getId(),
                     'email' => $user->getEmail(),
                     'adress' => $user->getAdress(),
-                    'first_name' => $user->getFirstName(),
-                    'last_name' => $user->getLastName(),
+                    'prenom' => $user->getPrenom(),
+                    'nom' => $user->getNom(),
                     'role' => $user->getRole(),
                 ];
                 header('location: index.php');
@@ -71,6 +71,52 @@ class AuthController extends Controller
             'errors' => $errors,
         ]);
     }
+
+    /*protected function login()
+    {
+        try {
+            $errors = [];
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+
+            // Récupération des données POST
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            $userRepository = new UserRepository();
+            $user = $userRepository->findOneByEmail($data['email']);
+
+            if ($user && $user->verifyPassword($data['password'])) {
+                // Regénère l'id de session pour éviter la fixation de session
+                session_regenerate_id(true);
+                $_SESSION['user'] = [
+                    'id' => $user->getId(),
+                    'email' => $user->getEmail(),
+                    'adress' => $user->getAdress(),
+                    'prenom' => $user->getPrenom(),
+                    'nom' => $user->getNom(),
+                    'role' => $user->getRole(),
+                ];
+
+                // Réponse JSON de succès
+                http_response_code(200);
+                header('Content-Type: application/json');
+                echo json_encode(['success' => true, 'message' => 'Connexion réussie']);
+                exit;
+            } else {
+                // Réponse JSON d'échec
+                http_response_code(401);
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Email ou mot de passe incorrect']);
+                exit;
+            }
+        } catch (\Exception $e) {
+            // Réponse JSON d'erreur
+            http_response_code(500);
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            exit;
+        }
+    }*/
 
 
     protected function logout()
