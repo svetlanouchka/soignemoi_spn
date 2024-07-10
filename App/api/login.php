@@ -1,10 +1,8 @@
 <?php
 
-require_once __DIR__ . '/App/Repository/UserRepository.php';
-require_once __DIR__ . '/App/Db/Mysql.php';
+require_once __DIR__ . '/../Repository/UserRepository.php';
 
 use App\Repository\UserRepository;
-use Exception;
 use App\Db\Mysql;
 
 // Définir l'en-tête de réponse JSON

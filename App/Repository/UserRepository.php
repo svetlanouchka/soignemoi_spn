@@ -2,7 +2,11 @@
 
 namespace App\Repository;
 
+require_once __DIR__ . '/Repository.php';
+require_once __DIR__ . '/../Entity/User.php';
+
 use App\Entity\User;
+use App\Repository\Repository;
 use App\Db\Mysql;
 use App\Tools\StringTools;
 

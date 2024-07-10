@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+require_once __DIR__ . '/../Tools/StringTools.php';
+
 use App\Tools\StringTools;
 use DateTime;
 use Exception;

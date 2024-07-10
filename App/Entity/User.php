@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-
+require_once __DIR__ . '/Entity.php';
 
 class User extends Entity
 {

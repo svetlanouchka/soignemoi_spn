@@ -12,6 +12,11 @@ class Mysql
     private static $_instance = null;
     private function __construct()
     {
+
+        if (!defined('_ROOTPATH_')) {
+            define('_ROOTPATH_', dirname(dirname(__DIR__))); 
+        }
+
         $conf = require_once _ROOTPATH_.'/db_config.php';
         
         if(isset($conf['db_name'])){

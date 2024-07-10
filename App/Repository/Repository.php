@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+require_once __DIR__ . '/../Db/Mysql.php';
+
 use App\Entity\Book;
 use App\Db\Mysql;
 use App\Tools\StringTools;
