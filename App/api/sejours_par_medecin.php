@@ -29,6 +29,21 @@ $sejoursData = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $sejours = [];
 foreach ($sejoursData as $sejourData) {
+    $avisQuery = $pdo->prepare("SELECT * FROM avis WHERE sejour_id = :sejour_id");
+    $avisQuery->bindParam(':sejour_id', $sejourData['id'], PDO::PARAM_INT);
+    $avisQuery->execute();
+    $avisData = $avisQuery->fetchAll(PDO::FETCH_ASSOC);
+
+    // Requête pour récupérer les prescriptions du séjour
+    $prescriptionsQuery = $pdo->prepare("SELECT p.*, m.nom AS medicament_nom
+                                        FROM prescriptions p
+                                        LEFT JOIN prescriptions_medicaments pm ON p.id = pm.prescription_id
+                                        LEFT JOIN medicaments m ON pm.medicament_id = m.id
+                                        WHERE p.sejour_id = :sejour_id");
+    $prescriptionsQuery->bindParam(':sejour_id', $sejourData['id'], PDO::PARAM_INT);
+    $prescriptionsQuery->execute();
+    $prescriptionsData = $prescriptionsQuery->fetchAll(PDO::FETCH_ASSOC);
+
     // Créer un tableau associatif pour chaque séjour
     $sejour = [
         "id" => $sejourData['id'],
@@ -37,7 +52,9 @@ foreach ($sejoursData as $sejourData) {
         "motif" => $sejourData['motif'],
         "specialite_id" => $sejourData['specialite_id'],
         "user_nom" => $sejourData['user_nom'],
-        "user_prenom" => $sejourData['user_prenom']
+        "user_prenom" => $sejourData['user_prenom'],
+        "avis" => $avisData,
+        "prescriptions" => $prescriptionsData
         // Ajoutez d'autres champs si nécessaire
     ];
     $sejours[] = $sejour;

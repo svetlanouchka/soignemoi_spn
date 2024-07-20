@@ -11,8 +11,7 @@
             <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 line-heght-2 custom-h1">Votre Santé, Notre Priorité</h1>
             <p class="lead">Bienvenue à SoigneMoi, votre hôpital de confiance dans la région lilloise. Nous nous engageons à fournir des soins de qualité avec une attention personnalisée pour chaque patient. Grâce à notre nouvelle plateforme en ligne, planifiez facilement vos séjours, consultez vos historiques médicaux et accédez à des services médicaux optimisés pour répondre à tous vos besoins de santé. Rejoignez-nous et découvrez une expérience de soins de santé innovante et humaine.</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Créer votre séjour</button>
-                <button type="button" class="btn btn-outline-secondary btn-lg px-4">En savoir plus</button>
+            <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=create" class="btn btn-primary btn-lg px-4 me-md-2">Créer votre séjour</a>
             </div>
         </div>
     </div>

@@ -3,7 +3,8 @@ require_once __DIR__ .'/../Db/Mysql.php';
 
 // Récupérer les données de la requête
 $requestData = json_decode(file_get_contents('php://input'), true); // Récupérer les données JSON envoyées par POST
-
+error_log('Données reçues:');
+error_log(print_r($requestData, true));
 // Vérifier si les données nécessaires sont présentes
 if (!isset($requestData['libelle'], $requestData['date_avis'], $requestData['description'], $requestData['medecin_id'], $requestData['sejour_id'])) {
     http_response_code(400);
@@ -17,6 +18,9 @@ $date_avis = $requestData['date_avis'];
 $description = $requestData['description'];
 $medecinId = $requestData['medecin_id'];
 $sejourId = $requestData['sejour_id'];
+
+error_log('Données extraites:');
+error_log("libelle: $libelle, date_avis: $date_avis, description: $description, medecin_id: $medecinId, sejour_id: $sejourId");
 
 try {
     $pdo = \App\Db\Mysql::getInstance()->getPDO();
@@ -32,7 +36,7 @@ try {
 
     // Répondre avec un message de succès
     http_response_code(201);
-    echo json_encode(['message' => 'Avis ajouté avec succès.']);
+    echo json_encode(['success' => true, 'message' => 'Avis ajouté avec succès.']);
 
 } catch (PDOException $e) {
     // En cas d'erreur, répondre avec un message d'erreur
