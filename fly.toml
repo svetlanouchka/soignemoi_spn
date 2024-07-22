@@ -1,0 +1,30 @@
+# fly.toml app configuration file generated for soignemoi-spn on 2024-07-22T20:40:21+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'soignemoi-spn'
+primary_region = 'cdg'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  [services.concurrency]
+  soft_limit = 25
+  hard_limit = 50
+[services.tcp_checks]
+  [services.tcp_checks.grace_period]
+  seconds = 15
+  [services.tcp_checks.interval]
+  seconds = 10
+  [services.tcp_checks.timeout]
+  seconds = 2
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
