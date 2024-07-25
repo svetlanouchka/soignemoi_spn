@@ -23,6 +23,20 @@ if (!isset($_SESSION['user'])) {
 
 define('_ROOTPATH_', __DIR__);
 
+function my_autoload($class) {
+
+    $file = __DIR__ . '/' . str_replace('\\', '/', $class) . '.php';
+    
+
+    if (file_exists($file)) {
+        require_once $file;
+    }
+}
+
+// Enregistre la fonction d'autoloading
+spl_autoload_register('my_autoload');
+
+
 spl_autoload_register();
 
 use App\Controller\Controller;
