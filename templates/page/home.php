@@ -1,5 +1,5 @@
 <?php
-    require_once "templates/header.php"
+require_once "templates/header.php"
 ?>
 
 <div class="container col-xxl-8 px-4 py-5">
@@ -11,7 +11,7 @@
             <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 line-heght-2 custom-h1">Votre Santé, Notre Priorité</h1>
             <p class="lead">Bienvenue à SoigneMoi, votre hôpital de confiance dans la région lilloise. Nous nous engageons à fournir des soins de qualité avec une attention personnalisée pour chaque patient. Grâce à notre nouvelle plateforme en ligne, planifiez facilement vos séjours, consultez vos historiques médicaux et accédez à des services médicaux optimisés pour répondre à tous vos besoins de santé. Rejoignez-nous et découvrez une expérience de soins de santé innovante et humaine.</p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=create" class="btn btn-primary btn-lg px-4 me-md-2">Créer votre séjour</a>
+                <a href="https://soignemoi-spn-snowy-butterfly-3637.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=create" class="btn btn-primary btn-lg px-4 me-md-2">Créer votre séjour</a>
             </div>
         </div>
     </div>
@@ -88,8 +88,8 @@
     <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Bienvenue dans l'espace administrateur de notre hôpital. Cet espace dédié permet aux administrateurs de gérer efficacement les ressources médicales et les opérations quotidiennes.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=auth&action=login" class="btn btn-primary btn-lg px-4 gap-3">Connectez-vous</a>
-    </div>
+            <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=auth&action=login" class="btn btn-primary btn-lg px-4 gap-3">Connectez-vous</a>
+        </div>
     </div>
 </div>
 
@@ -175,10 +175,6 @@
         </div>-->
 
 <?php
-    require_once "templates/footer.php"
-    
+require_once "templates/footer.php"
+
 ?>
-
-
-
-
