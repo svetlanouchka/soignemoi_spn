@@ -21,7 +21,7 @@ use App\Tools\NavigationTools;
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <div class="col-md-3 mb-2 mb-md-0">
-        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+        <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=page&action=home" class="d-inline-flex link-body-emphasis text-decoration-none">
         <img width="120" src="assets/images/Soigne moi (2).png" alt="">
         </a>
         </div>
@@ -48,7 +48,7 @@ use App\Tools\NavigationTools;
                     <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=auth&action=logout" class="btn btn-primary">Déconnexion</a>
                 <?php } else { ?>
                     <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=auth&action=login" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('auth', 'login') ?>">Connexion</a>
-                    <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=auth&action=register" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('user', 'register') ?>">Créer un compte</a>
+                    <a href="http://localhost/studi_ecf/soignemoi_spn/index.php?controller=user&action=register" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('user', 'register') ?>">Créer un compte</a>
                 <?php } ?>
             </div>
     </div>
