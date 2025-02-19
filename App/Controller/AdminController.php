@@ -11,6 +11,7 @@ use App\Repository\UserRepository;
 use App\Entity\Planning;
 use App\Entity\User;
 use App\Db\Mysql;
+use App\Db\MongoService;
 
 class AdminController extends Controller
 {
@@ -42,6 +43,11 @@ class AdminController extends Controller
                     case 'viewPlanningByMedecinId':
                         $this->checkAdmin();
                         $this->viewPlanningByMedecinId((int)$_GET['medecin_id']);
+                        break;
+                    case 'stats':
+                        $this->checkAdmin();
+                        $this->stats();
+                        break;
                     case 'dashboard':
                         $this->checkAdmin();
                         $this->dashboard();
@@ -60,52 +66,37 @@ class AdminController extends Controller
         }
     }
 
-
-    protected function dashboard(): void
-    {
-        $this->render('admin/dashboard', [
-            'pageTitle' => 'Espace Admin'
-        ]);
-    }
-
-
-    /*protected function createMedecin(): void
+    protected function stats(): void
     {
         try {
-            $errors = [];
-            $medecin = new Medecin();
+            $mongoService = new MongoService();
+            $statistics = $mongoService->getStatistics();
 
-            $specialiteRepository = new SpecialiteRepository();
-            $specialites = $specialiteRepository->findAll();
-
-            if (isset($_POST['saveMedecin'])) {
-                $medecin->setNom($_POST['nom']);
-                $medecin->setPrenom($_POST['prenom']);
-                $medecin->setSpecialite_id($_POST['specialite_id']);
-                $medecin->setMatricule($_POST['matricule']);
-
-                $errors = $medecin->validate();
-
-                if (empty($errors)) {
-                    $medecinRepository = new MedecinRepository;
-                    $medecinRepository->save($medecin);
-                    header('Location: index.php?controller=admin&action=viewMedecins');
-                    exit;
-                }
-            }
-
-            $this->render('admin/add_edit', [
-                'medecin' => $medecin,
-                'specialites' => $specialites,
-                'pageTitle' => 'Créer un médecin',
-                'errors' => $errors
+            $this->render('admin/stats', [
+                'pageTitle' => 'Statistiques', 
+                'statistics' => $statistics
             ]);
         } catch (\Exception $e) {
             $this->render('errors/default', [
                 'error' => $e->getMessage()
             ]);
         }
-    }*/
+    }
+
+    protected function dashboard(): void
+    {
+        try {
+            $this->render('admin/dashboard', [
+                'pageTitle' => 'Espace Admin', 
+            ]);
+        } catch (\Exception $e) {
+            $this->render('errors/default', [
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+
     protected function createMedecin(): void
     {
         try {
