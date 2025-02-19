@@ -2,10 +2,8 @@
     "name": "soignemoi/soignemoi",
     "description": "Soigne Moi application",
     "require": {
-        "vlucas/phpdotenv": "^5.4"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^11.2"
+        "mongodb/mongodb": "*",
+        "vlucas/phpdotenv": "^5.6"
     },
     "autoload": {
         "psr-4": {

@@ -36,7 +36,7 @@ class AuthController extends Controller
     {
         $errors = [];
 
-        
+        var_dump($_POST); 
 
         if (isset($_POST['loginUser'])) {
 
@@ -45,8 +45,9 @@ class AuthController extends Controller
             $user = $userRepository->findOneByEmail($_POST['email']);
 
             if ($user) {
-                // Affiche les informations de l'utilisateur trouvé
-                var_dump($user);
+                var_dump($user); // Vérifier si l'utilisateur est trouvé
+            } else {
+                echo "Aucun utilisateur trouvé avec cet email.";
             }
 
             if ($user && $user->verifyPassword($_POST['password'])) {

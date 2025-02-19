@@ -49,12 +49,15 @@ class Mysql
         return self::$_instance;
     }
 
-    public function getPDO():\PDO
+    public function getPDO(): \PDO
     {
-        if(is_null($this->pdo)) {
-            $this->pdo = new \PDO('mysql:dbname=' . $this->db_name  .';charset=utf8;host=' . $this->db_host.':'.$this->db_port, $this->db_user, $this->db_password);
+        if (is_null($this->pdo)) {
+            $dsn = 'mysql:host=' . $this->db_host . ';port=' . $this->db_port . ';dbname=' . $this->db_name . ';charset=utf8';
+
+    var_dump($dsn);
+            $this->pdo = new \PDO($dsn, $this->db_user, $this->db_password);
+            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
         return $this->pdo;
-
     }
 }
