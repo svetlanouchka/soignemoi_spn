@@ -1,6 +1,8 @@
 <?php
 namespace App\Db;
 
+require_once __DIR__ . 'C:/xampp/htdocs/studi_ecf/soignemoi_spn/vendor/autoload.php';
+
 use MongoDB\Client;
 
 class MongoService {
@@ -12,6 +14,10 @@ class MongoService {
         $this->db = $this->client->soignemoiDB;
     }
 
+    public function getDb()
+    {
+        return $this->db;
+    }
     public function getStatistics() {
         $collection = $this->db->statistics;
         $data = $collection->find()->toArray();

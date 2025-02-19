@@ -6,6 +6,11 @@
 app = 'soignemoi-spn'
 primary_region = 'cdg'
 
+[build]
+dockerfile = "./Dockerfile"
+
+[env] = "80"
+
 [http_service]
   internal_port = 8080
   force_https = true
