@@ -20,10 +20,7 @@ jobs:
           echo "FLYCTL_INSTALL=/home/runner/.fly" >> $GITHUB_ENV
           echo "PATH=/home/runner/.fly/bin:$PATH" >> $GITHUB_ENV
 
-      - name: Verify flyctl installation
-        run: /home/runner/.fly/bin/flyctl --version
-
       - name: Deploy to Fly.io
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        run: flyctl deploy --remote-only
+        run: /home/runner/.fly/bin/flyctl deploy --remote-only
