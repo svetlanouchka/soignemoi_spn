@@ -13,11 +13,21 @@ dockerfile = "./Dockerfile"
 PORT = "80"
 
 [http_service]
-  internal_port = 8080
+  internal_port = 80
   force_https = true
-  [services.concurrency]
-  soft_limit = 25
-  hard_limit = 50
+[services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = "80"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443"
+    
 [services.tcp_checks]
   [services.tcp_checks.grace_period]
   seconds = 15
