@@ -9,7 +9,8 @@ primary_region = 'cdg'
 [build]
 dockerfile = "./Dockerfile"
 
-[env] = "80"
+[env] 
+PORT = "80"
 
 [http_service]
   internal_port = 8080
