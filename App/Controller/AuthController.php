@@ -44,12 +44,6 @@ class AuthController extends Controller
 
             $user = $userRepository->findOneByEmail($_POST['email']);
 
-            if ($user) {
-                var_dump($user); // Vérifier si l'utilisateur est trouvé
-            } else {
-                echo "Aucun utilisateur trouvé avec cet email.";
-            }
-
             if ($user && $user->verifyPassword($_POST['password'])) {
                 // Regénère l'id session pour éviter la fixation de session
                 session_regenerate_id(true);

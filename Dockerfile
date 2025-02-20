@@ -9,6 +9,9 @@ COPY . /var/www/html/
 # Installation des extensions PHP nécessaires
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
+# Activer le module mod_rewrite d'Apache
+RUN a2enmod rewrite
+
 # Configuration d'Apache
 EXPOSE 80
 
