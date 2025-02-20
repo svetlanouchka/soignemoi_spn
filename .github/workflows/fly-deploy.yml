@@ -17,8 +17,8 @@ jobs:
       - name: Set up Fly.io
         run: |
           curl -L https://fly.io/install.sh | sh
-          export FLYCTL_INSTALL="/home/runner/.fly"
-          export PATH="$FLYCTL_INSTALL/bin:$PATH"
+          echo "FLYCTL_INSTALL=/home/runner/.fly"
+          echo "PATH=$FLYCTL_INSTALL/bin:$PATH" 
 
       - name: Authenticate with Fly.io
         run: flyctl auth login --access-token ${{ secrets.FLY_API_TOKEN }}
