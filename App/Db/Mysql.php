@@ -54,7 +54,6 @@ class Mysql
         if (is_null($this->pdo)) {
             $dsn = 'mysql:host=' . $this->db_host . ';port=' . $this->db_port . ';dbname=' . $this->db_name . ';charset=utf8';
 
-    var_dump($dsn);
             $this->pdo = new \PDO($dsn, $this->db_user, $this->db_password);
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
