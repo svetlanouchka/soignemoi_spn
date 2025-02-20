@@ -21,7 +21,8 @@ jobs:
           echo "PATH=$FLYCTL_INSTALL/bin:$PATH" 
 
       - name: Authenticate with Fly.io
-        run: flyctl auth login --access-token ${{ secrets.FLY_API_TOKEN }}
+        run: /home/runner/.fly/bin/flyctl auth login --access-token ${{ secrets.FLY_API_TOKEN }}
+
 
       - name: Deploy to Fly.io
         env:
