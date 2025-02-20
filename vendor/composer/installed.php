@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'soignemoi/soignemoi',
-        'pretty_version' => 'dev-develop',
-        'version' => 'dev-develop',
-        'reference' => '757737d6d1039ae3ed5f600bdedc5eacf5e48a28',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '5e52192d688de2c927c22988fb8dd4a2c48dae32',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -47,9 +47,9 @@
             'dev_requirement' => false,
         ),
         'soignemoi/soignemoi' => array(
-            'pretty_version' => 'dev-develop',
-            'version' => 'dev-develop',
-            'reference' => '757737d6d1039ae3ed5f600bdedc5eacf5e48a28',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '5e52192d688de2c927c22988fb8dd4a2c48dae32',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

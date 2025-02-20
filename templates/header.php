@@ -54,6 +54,6 @@ use App\Tools\NavigationTools;
                 <?php } ?>
             </div>
     </div>
-    </header>
+    </header> 
 
     <main>
