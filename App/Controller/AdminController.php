@@ -162,7 +162,6 @@ class AdminController extends Controller
                 }
             }
         }
-        var_dump($errors);
             $this->render('admin/add_edit', [
                 'medecin' => $medecin,
                 'specialites' => $specialites,

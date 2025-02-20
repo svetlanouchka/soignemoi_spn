@@ -1,7 +1,7 @@
 <?php
 namespace App\Db;
 
-require_once __DIR__ . 'C:/xampp/htdocs/studi_ecf/soignemoi_spn/vendor/autoload.php';
+require_once 'C:/xampp/htdocs/studi_ecf/soignemoi_spn/vendor/autoload.php';
 
 use MongoDB\Client;
 
