@@ -1,4 +1,4 @@
-<?php require_once _ROOTPATH_ . '\templates\header.php';
+<?php require_once _ROOTPATH_ . '/templates/header.php';
 /** @var \App\Entity\Medecin $medecin */
 ?>
 
@@ -18,4 +18,4 @@
     </form>
 </div>
 
-<?php require_once _ROOTPATH_ . '\templates\footer.php' ?>
+<?php require_once _ROOTPATH_ . '/templates/footer.php' ?>

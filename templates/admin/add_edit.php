@@ -1,4 +1,4 @@
-<?php require_once _ROOTPATH_ . '\templates\header.php';
+<?php require_once _ROOTPATH_ . '/templates/header.php';
 /** @var \App\Entity\Medecin $medecin */
 ?>
 <div class="container mt-5">
@@ -41,4 +41,4 @@
 </div>
 
 
-<?php require_once _ROOTPATH_ . '\templates\footer.php' ?>
+<?php require_once _ROOTPATH_ . '/templates/footer.php' ?>

@@ -1,4 +1,4 @@
-<?php require_once _ROOTPATH_ . '\templates\header.php'; ?>
+<?php require_once _ROOTPATH_ . '/templates/header.php'; ?>
 
 <div class="container mt-5">
 <h1>Login</h1>
@@ -24,4 +24,4 @@
 
 </form>
 </div>
-<?php require_once _ROOTPATH_ . '\templates\footer.php'; ?>
+<?php require_once _ROOTPATH_ . '/templates/footer.php'; ?>

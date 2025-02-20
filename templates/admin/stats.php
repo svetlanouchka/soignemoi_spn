@@ -1,5 +1,5 @@
 <?php
-require_once _ROOTPATH_ . '\templates\header.php'; ?>
+require_once _ROOTPATH_ . '/templates/header.php'; ?>
 
 <div class="container mt-5">
     <h1 class="mb-4"><?= $pageTitle ?></h1>
@@ -68,4 +68,4 @@ require_once _ROOTPATH_ . '\templates\header.php'; ?>
         }
     });
 </script>
-<?php require_once _ROOTPATH_ . '\templates\footer.php' ?>
+<?php require_once _ROOTPATH_ . '/templates/footer.php' ?>

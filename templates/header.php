@@ -29,28 +29,28 @@ use App\Tools\NavigationTools;
             </div>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=page&action=home" class="nav-link px-2 link-secondary" <?= NavigationTools::addActiveClass('page', 'home') ?>>Accueil</a></li>
+                <li><a href="https://soignemoi-spn.fly.dev/index.php?controller=page&action=home" class="nav-link px-2 link-secondary" <?= NavigationTools::addActiveClass('page', 'home') ?>>Accueil</a></li>
                 <?php if (User::isLogged()) { ?>
-                    <li><a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=create" class="nav-link px-2" <?= NavigationTools::addActiveClass('sejour', 'create') ?>>Créer le séjour</a></li>
+                    <li><a href="https://soignemoi-spn.fly.dev/index.php?controller=sejour&action=create" class="nav-link px-2" <?= NavigationTools::addActiveClass('sejour', 'create') ?>>Créer le séjour</a></li>
                 <?php } else { ?>
-                    <li><a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=auth&action=login" class="nav-link px-2" <?= NavigationTools::addActiveClass('auth', 'login') ?>>Créer le séjour</a></li>
+                    <li><a href="https://soignemoi-spn.fly.dev/index.php?controller=auth&action=login" class="nav-link px-2" <?= NavigationTools::addActiveClass('auth', 'login') ?>>Créer le séjour</a></li>
                 <?php } ?>
                 <?php if (User::isLogged()) { ?>
-                    <li><a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=list" class="nav-link px-2" <?= NavigationTools::addActiveClass('sejour', 'list') ?>>Votre séjour chez nous</a></li>
+                    <li><a href="https://soignemoi-spn.fly.dev/index.php?controller=sejour&action=list" class="nav-link px-2" <?= NavigationTools::addActiveClass('sejour', 'list') ?>>Votre séjour chez nous</a></li>
                 <?php } else { ?>
-                    <li><a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=auth&action=login" class="nav-link px-2" <?= NavigationTools::addActiveClass('auth', 'login') ?>>Votre séjour chez nous</a></li>
+                    <li><a href="https://soignemoi-spn.fly.dev/index.php?controller=auth&action=login" class="nav-link px-2" <?= NavigationTools::addActiveClass('auth', 'login') ?>>Votre séjour chez nous</a></li>
                 <?php } ?>
                 <?php if (USer::isAdmin()) { ?>
-                    <li><a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=admin&action=dashboard" class="nav-link px-2">Espace admin</a></li>
+                    <li><a href="https://soignemoi-spn.fly.dev/index.php?controller=admin&action=dashboard" class="nav-link px-2">Espace admin</a></li>
                 <?php } ?>
             </ul>
 
             <div class="col-md-3 text-end">
                 <?php if (User::isLogged()) { ?>
-                    <a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=auth&action=logout" class="btn btn-primary">Déconnexion</a>
+                    <a href="https://soignemoi-spn.fly.dev/index.php?controller=auth&action=logout" class="btn btn-primary">Déconnexion</a>
                 <?php } else { ?>
-                    <a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=auth&action=login" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('auth', 'login') ?>">Connexion</a>
-                    <a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=user&action=register" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('user', 'register') ?>">Créer un compte</a>
+                    <a href="https://soignemoi-spn.fly.dev/index.php?controller=auth&action=login" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('auth', 'login') ?>">Connexion</a>
+                    <a href="https://soignemoi-spn.fly.dev/index.php?controller=user&action=register" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('user', 'register') ?>">Créer un compte</a>
                 <?php } ?>
             </div>
     </div>

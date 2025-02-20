@@ -35,7 +35,7 @@ require_once "templates/header.php"
                 <div class="card-body">
                     <h5 class="card-title">Chirurgie</h5>
                     <p class="card-text">Le département de chirurgie de notre hôpital se distingue par son expertise et ses innovations constantes. Nos chirurgiens spécialisés couvrent une vaste gamme d'interventions, des plus courantes aux plus complexes, en assurant des soins pré et post-opératoires de haute qualité pour une récupération rapide et sécurisée.</p>
-                    <a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=create" class="btn btn-primary">Créez votre séjour</a>
+                    <a href="https://soignemoi-spn.fly.dev/index.php?controller=sejour&action=create" class="btn btn-primary">Créez votre séjour</a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@ require_once "templates/header.php"
                 <div class="card-body">
                     <h5 class="card-title">Dermatologie</h5>
                     <p class="card-text">Le service de dermatologie propose une prise en charge complète des affections de la peau, des ongles et des cheveux. Nos dermatologues sont formés pour diagnostiquer et traiter une grande variété de conditions dermatologiques, en utilisant les dernières avancées technologiques et thérapeutiques pour assurer des soins efficaces et adaptés.</p>
-                    <a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=create" class="btn btn-primary">Créez votre séjour</a>
+                    <a href="https://soignemoi-spn.fly.dev/index.php?controller=sejour&action=create" class="btn btn-primary">Créez votre séjour</a>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@ require_once "templates/header.php"
                 <div class="card-body">
                     <h5 class="card-title">Pédiatrie</h5>
                     <p class="card-text">Notre unité de pédiatrie offre des soins médicaux spécialisés pour les enfants, de la naissance à l'adolescence. Nous mettons un point d'honneur à créer un environnement accueillant et sécurisant pour nos jeunes patients, en collaborant étroitement avec les familles pour répondre aux besoins spécifiques de chaque enfant.</p>
-                    <a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=create" class="btn btn-primary">Créez votre séjour</a>
+                    <a href="https://soignemoi-spn.fly.dev/index.php?controller=sejour&action=create" class="btn btn-primary">Créez votre séjour</a>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@ require_once "templates/header.php"
                 <div class="card-body">
                     <h5 class="card-title">Gynécologie</h5>
                     <p class="card-text">Le service de gynécologie de notre hôpital est dédié à la santé des femmes à toutes les étapes de leur vie. Nos gynécologues offrent une gamme complète de services, allant des examens de routine aux traitements spécialisés, en passant par le suivi de la grossesse, pour assurer un bien-être optimal et une prise en charge personnalisée.</p>
-                    <a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=create" class="btn btn-primary">Créez votre séjour</a>
+                    <a href="https://soignemoi-spn.fly.dev/index.php?controller=sejour&action=create" class="btn btn-primary">Créez votre séjour</a>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@ require_once "templates/header.php"
                 <div class="card-body">
                     <h5 class="card-title">Neurologie</h5>
                     <p class="card-text">Le département de neurologie se consacre au diagnostic et au traitement des troubles du système nerveux. Nos neurologues expérimentés utilisent des techniques avancées pour gérer des conditions neurologiques variées, en fournissant des soins précis et personnalisés pour améliorer la qualité de vie de nos patients.</p>
-                    <a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=sejour&action=create" class="btn btn-primary">Créez votre séjour</a>
+                    <a href="https://soignemoi-spn.fly.dev/index.php?controller=sejour&action=create" class="btn btn-primary">Créez votre séjour</a>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@ require_once "templates/header.php"
     <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Bienvenue dans l'espace administrateur de notre hôpital. Cet espace dédié permet aux administrateurs de gérer efficacement les ressources médicales et les opérations quotidiennes.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a href="https://soignemoi-spn.fly.dev/studi_ecf/soignemoi_spn/index.php?controller=auth&action=login" class="btn btn-primary btn-lg px-4 gap-3">Connectez-vous</a>
+            <a href="https://soignemoi-spn.fly.dev/index.php?controller=auth&action=login" class="btn btn-primary btn-lg px-4 gap-3">Connectez-vous</a>
         </div>
     </div>
 </div>

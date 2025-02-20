@@ -1,4 +1,4 @@
-<?php require_once _ROOTPATH_ . '\templates\header.php'; ?>
+<?php require_once _ROOTPATH_ . '/templates/header.php'; ?>
 
 <div class="container mt-5">
     <div class="alert alert-success" role="alert">
@@ -8,4 +8,4 @@
     <a href="index.php?controller=sejour&action=list" class="btn btn-secondary">Visualiser vos séjours</a>
 </div>
 
-<?php require_once _ROOTPATH_ . '\templates\footer.php'; ?>
+<?php require_once _ROOTPATH_ . '/templates/footer.php'; ?>
