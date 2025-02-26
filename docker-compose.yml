@@ -1,13 +1,32 @@
-version: '3.1'
+
 
 services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_NAME: soignemoi_spn
+      DB_USER: root
+      DB_PASSWORD: Openeyes088!
+      DB_PORT: 3306
+    depends_on:
+      - db
+    networks:
+      - soignemoi-network
+
   db:
     image: mysql:latest
     container_name: my_mysql_container
     environment:
       MYSQL_ROOT_PASSWORD: Openeyes088!
       MYSQL_DATABASE: soignemoi_spn
-      MYSQL_USER: root
       MYSQL_PASSWORD: Openeyes088!
     ports:
       - "3306:3306"
+    networks:
+      - soignemoi-network
+
+networks:
+  soignemoi-network:

@@ -107,7 +107,6 @@ class AdminController extends Controller
     
             if (isset($_POST['saveMedecin'])) {
 
-                var_dump($_POST);
                 $nom = $_POST['nom'] ?? null;
                 $prenom = $_POST['prenom'] ?? null;
                 $specialite_id = $_POST['specialite_id'] ?? null;
@@ -115,7 +114,6 @@ class AdminController extends Controller
                 $email = $_POST['email'] ?? null;
                 $password = $_POST['password'] ?? null;
 
-                var_dump($nom, $prenom, $specialite_id, $matricule, $email, $password);
 
             if (!$nom || !$prenom || !$specialite_id || !$matricule || !$email || !$password) {
                 $errors[] = "Tous les champs doivent être remplis.";

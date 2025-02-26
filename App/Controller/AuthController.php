@@ -36,7 +36,6 @@ class AuthController extends Controller
     {
         $errors = [];
 
-        var_dump($_POST); 
 
         if (isset($_POST['loginUser'])) {
 
