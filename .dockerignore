@@ -1,0 +1,11 @@
+# flyctl launch added from .gitignore
+
+
+# flyctl launch added from vendor\psr\log\.gitignore
+vendor\psr\log\**\vendor
+fly.toml
+*.log
+*.md
+tmp/
+cache/
+my_custom.cnf

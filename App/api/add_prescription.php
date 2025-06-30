@@ -46,13 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
     
-    // Assuming the validation is successful
+
     echo json_encode(['success' => true, 'data' => $data]);
 
-    // Log the received data for debugging
+    
     error_log("Received data: " . print_r($data, true));
 
-    // Log each field individually to verify presence and value
+    
     $requiredFields = ['libelle', 'date_prescription', 'description', 'medecin_id', 'sejour_id', 'medicament_id', 'posologie', 'date_debut', 'date_fin'];
     $missingFields = [];
 

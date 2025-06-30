@@ -3,7 +3,7 @@
         'name' => 'soignemoi/soignemoi',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5e52192d688de2c927c22988fb8dd4a2c48dae32',
+        'reference' => 'e5a1906f3c61e2abeb201189d7040a161390131f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -49,7 +49,7 @@
         'soignemoi/soignemoi' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5e52192d688de2c927c22988fb8dd4a2c48dae32',
+            'reference' => 'e5a1906f3c61e2abeb201189d7040a161390131f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

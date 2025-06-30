@@ -1,19 +1,37 @@
 FROM php:8.1-apache
 
-# Définir le répertoire de travail
+
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libssl-dev \
+    ca-certificates \
+    && update-ca-certificates
+
+RUN ls -l /etc/ssl/certs/ca-certificates.crt
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+
+RUN pecl install mongodb-1.20.0 && docker-php-ext-enable mongodb
+
+RUN openssl version
+
+
 WORKDIR /var/www/html
 
-# Copier le code source de l'application
+
+COPY composer.json composer.lock /var/www/html/
+
+
+RUN composer install --no-scripts --no-interaction
+
 COPY . /var/www/html/
 
-# Installation des extensions PHP nécessaires
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Activer le module mod_rewrite d'Apache
 RUN a2enmod rewrite
 
-# Configuration d'Apache
 EXPOSE 80
 
-# Définir la commande d'exécution (Apache est démarré par défaut)
 CMD ["apache2-foreground"]

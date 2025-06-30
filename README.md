@@ -58,10 +58,18 @@ Les trois applications (web, mobile, desktop) interagissent avec une base de don
 
 ### Application Web
 
-   Accéder à https://soignemoi-spn-snowy-butterfly-3637.fly.dev/ 
+   Accéder à https://soignemoi-spn.fly.dev/
    Idéntifiants : 
    Email : test@gmail.com
    Mot de passe : test
+
+   ### Docker
+Un fichier `Dockerfile` et `docker-compose.yml` permettent de lancer :
+- L'application PHP avec Apache
+- Un conteneur MySQL
+- Un conteneur MongoDB
+
+docker-compose up --build
 
 ### Application Mobile
 1. **Cloner le dépôt Git** :

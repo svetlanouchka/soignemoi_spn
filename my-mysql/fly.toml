@@ -1,0 +1,27 @@
+# fly.toml app configuration file generated for my-mysql-billowing-bush-4209 on 2025-03-10T13:12:45+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'my-mysql-billowing-bush-4209'
+primary_region = 'cdg'
+
+[build]
+  image = 'mysql:8.4.4'
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[processes]
+ app = """--datadir /data/mysql_ """
+
+[mounts]
+  source = "mysqldata"
+  destination = "/data"
+
+[env]
+  MYSQL_DATABASE = "some_db"
+  MYSQL_USER = "spn_user"
+
