@@ -4,20 +4,26 @@ services:
   app:
     build: .
     ports:
-      - "8080:80"
+      - "80:80"
     environment:
       DB_HOST: db
       DB_NAME: soignemoi_spn
       DB_USER: root
       DB_PASSWORD: Openeyes088!
       DB_PORT: 3306
+      MONGO_HOST: mongodb
+      MONGO_PORT: 27017
+      MONGO_USER: soignemoi_user
+      MONGO_PASSWORD: spn2025!
+      MONGO_DB_NAME: soignemoiDB
     depends_on:
       - db
+      - mongodb
     networks:
       - soignemoi-network
 
   db:
-    image: mysql:latest
+    image: mysql:8.2.0
     container_name: my_mysql_container
     environment:
       MYSQL_ROOT_PASSWORD: Openeyes088!
@@ -25,8 +31,29 @@ services:
       MYSQL_PASSWORD: Openeyes088!
     ports:
       - "3306:3306"
+    volumes:
+      - ./my_custom.cnf:/etc/mysql/conf.d/my_custom.cnf:ro
+      - db_data:/var/lib/mysql
+    networks:
+      - soignemoi-network
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongo_container
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: soignemoi_user
+      MONGO_INITDB_ROOT_PASSWORD: spn2025!
+      MONGO_INITDB_DATABASE: soignemoiDB
+    volumes:
+      - mongodb_data:/data/db
     networks:
       - soignemoi-network
 
 networks:
   soignemoi-network:
+
+volumes:
+  db_data:
+  mongodb_data:

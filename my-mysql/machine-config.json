@@ -1,0 +1,10 @@
+{
+    "config": {
+    "mounts": [
+        {
+        "volume": "mysqldata",
+        "path": "/data"
+        }
+    ]
+    }
+}

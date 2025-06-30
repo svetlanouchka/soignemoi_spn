@@ -19,7 +19,6 @@ class UserController extends Controller
                         $this->register();
                         break;
                     case 'delete':
-                        // Appeler méthode delete()
                         break;
                     default:
                         throw new \Exception("Cette action n'existe pas : " . $_GET['action']);

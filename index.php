@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__.'/config.php';
+require_once __DIR__ . '/config.php';
 
 // Sécurise le cookie de session avec httponly
 session_set_cookie_params([
@@ -11,41 +11,28 @@ session_set_cookie_params([
 ]);
 session_start();
 
-// Vérifiez si la session est démarrée
-if (!isset($_SESSION)) {
-    echo "Session n'est pas démarrée.";
-}
-
-if (!isset($_SESSION['user'])) {
-    echo "Utilisateur non connecté.";
-} else {
-    $user_id = $_SESSION['user']['id'];
-}
-
 define('_ROOTPATH_', __DIR__);
 
-function my_autoload($class) {
-
+// Fonction d'autoloading
+function my_autoload($class)
+{
     $file = __DIR__ . '/' . str_replace('\\', '/', $class) . '.php';
-    
-
     if (file_exists($file)) {
         require_once $file;
     }
 }
 
-// Enregistre la fonction d'autoloading
 spl_autoload_register('my_autoload');
 
-
-spl_autoload_register();
-
 use App\Controller\Controller;
-// Nous avons besoin de cette classe pour verifier si l'utilisateur est connecté
-use App\Entity\User;
 
+// Pas de redirection, on charge la page d'accueil dans tous les cas
+if (isset($_SESSION['user'])) {
+    $user_id = $_SESSION['user']['id']; // Accessible si connecté
+} else {
+    // Pas d'echo ni de redirection, on continue simplement
+    $user_id = null; // Ou toute autre valeur par défaut si nécessaire
+}
 
 $controller = new Controller();
 $controller->route();
-
-
